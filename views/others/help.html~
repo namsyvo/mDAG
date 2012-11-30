@@ -1,0 +1,44 @@
+{{extend 'layout.html'}}
+
+<br />
+
+<a name="mdag"></a>
+<h2>What can we do with mDAG?</h2>
+
+<br />
+<h3>Interpretation of pattern of gene response</h3>
+    The pattern of response of any gene is represented by a <i>directed graph</i>. Although, these patterns have special graphical properties, visually, they can be easily interpreted.
+
+<img width="300px" src="{{=URL(request.application, 'static/images', 'graph-example.png')}}" align =right>
+
+<br />
+<br />
+    As an example, the figure below shows two patterns.  A gene bearing the pattern of the left responds to 4 chemicals a, b, c, and d as follows: (i) more to a than to b & c, (ii) more to b than to d, (iii) more to c than to d, and (iv) indistinguishably between b and c.  Because this pattern is <i>contractible</i>, it can be described concisely as a > b~c > d.
+<br />
+<br />
+The response of a gene bearing the pattern on the right can be similarly described.  However, as this pattern is not contractible, it does not have a concise description as the other one.
+
+<br />
+<br />
+
+<h3>Filtering to identify secondary responses</h3>
+Users can filter patterns to select how genes respond specifically to individual treatments: affected or not affected, up-regulated or down-regulated by a treatment. Users can also filter patterns based on probe-set id, gene symbol, uni gene id, or accession number.
+
+<br />
+<br />
+
+<h3>Functional analyses of genes with same patterns</h3>
+
+Genes sharing same directed-graph patterns hypothetically share similar biological functions or are related in some ways. To facilitate further analyses, the software incorporates other tools that are well known for this task. Each cluster of genes with same patterns can be analyzed further via 3 external well-established tools with quite different approaches GeneMANIA, DAVID, and GCAT. Other tools will be incorporated in the future.
+
+<br />
+<br />
+
+<h3>More about implementation of mDAG</h3>
+Analysis of microarray gene expression data is done through three steps:
+    <ol>
+        <li>Significant genes are selected using Kruskal-Wallis with false discovery rate controlled.</li>
+        <li>Pattern of response for each gene is determined using Wilcoxon rank sum tests to detect how the gene responds to all pairs of treatments.</li>
+        <li>Genes with similar patterns are placed into the same cluster.  Similar patterns are further placed into "meta" clusters</li>
+    </ol>
+Although this software has only been applied to microarray data, conceptually, it can be adapted to other highthroughput technologies. The main reason is biological variation in gene response is independent of technologies. Consequently, this tool is useful for any studies that analyze comparatively response patterns in gene expression data with multiple treatments (chemicals, cell types, etc.)

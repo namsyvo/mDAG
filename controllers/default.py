@@ -1,0 +1,609 @@
+# * *****************************************************************************
+# * Filename:    default.py
+# * Author:      Nam S. Vo
+# * Update:      April 18, 2012
+# * Description: default controller for mdag app
+# * *****************************************************************************
+                  
+import os
+import sys
+import re
+from datetime import time, datetime
+
+import cPickle
+import shutil
+
+import sqlite3
+
+
+"""
+If reload = True, Methods is reloaded whenever there is an update with Methods
+If reload = False, Methods is not reloaded until the server will be restarted.
+It should be set to True while developing the software, but it should be set to
+False when the software will be deployed for running faster
+"""
+Methods = local_import('Methods', reload = False)
+
+
+def index():
+    # clear_sessions_errors(). This is a soft cron
+    # time.time() - os.stat('blast-data.txt').st_mtime > 24*60*60
+    
+    return dict()
+
+def user():
+    return dict(form = auth())
+
+def download():
+    return response.download(request, db)
+
+
+# * *****************************************************************************
+# * -----------------------------------------------------------------------------
+# * Modules for uploading datasets and parameters for analyses
+# * -----------------------------------------------------------------------------
+# * *****************************************************************************
+
+
+# * -----------------------------------------------------------------------------
+# * Function: pre_upload_processing
+# * Task:     validating dataset during uploading process
+# * Input:    form
+# * Output:   0 if there is any error
+# * -----------------------------------------------------------------------------
+               
+def pre_upload_processing(form):
+    rep_number = request.vars.rep_number.strip()
+    treat_reps = rep_number.split("\n")
+    numofrep = []
+    for i in range(len(treat_reps)):
+        treat_rep = treat_reps[i].split(" ")
+        if len(treat_rep) != 2:
+            form.errors.rep_number = "Dataset file: invalid name and number of replicates.\
+            Please make sure there is one name and one number in each line"
+            return 0
+        try:
+            numofrep.append(int(treat_rep[1]))
+        except:
+            form.errors.rep_number = "Dataset file: invalid numbers of replicates.\
+            Please make sure they are integers."
+            return 0
+    numoftreat = (len(numofrep)) # number of treatment groups involved
+    totalofrep = sum(numofrep) # total of replicates for all treatments
+
+    #Reading dataset file
+    rows = []
+    try:
+        row = request.vars.file_name.file.readline()
+    	if row.strip(): #not empty row
+        	rows.append(row)
+        row = request.vars.file_name.file.readline()
+    	if row.strip(): #not empty row
+        	rows.append(row)
+    except:
+        form.errors.file_name = "Dataset file: error in reading the dataset file"
+        return 0
+    NRows = len(rows)
+
+    if NRows < 2:
+        form.errors.file_name = "Dataset file: please make sure there is one\
+        header line and at least one data line in your dataset file"
+        return 0
+    else:
+        Header = rows[0].split('\t')
+        if len(Header) != (5 + totalofrep):
+            form.errors.file_name = "Dataset file and parameters: please make sure\
+            that the header line in your dataset file is compatible with the name\
+            and number of replicates you entered."
+            return 0
+        else:
+            try:
+                rowlist = rows[1].split('\t')
+                if len(rowlist) != (5 + totalofrep):
+                    form.errors.file_name = "Dataset file and parameters: please\
+                    make sure that the number of replicates you entered\
+                    is compatible with your dataset file"
+                    return 0
+                data = map(float, rowlist[5:])
+                if len(data) != totalofrep:
+                    form.errors.file_name = "Dataset file: please make sure there\
+                    is no missing values in expression data in your dataset file"
+                    return 0
+            except:
+                form.errors.file_name = "Dataset file: invalid data. Please make\
+                sure it follows the exact format"
+                return 0
+
+    #if reading file successuflly
+    form.vars.ori_file_name = request.vars.file_name.filename
+    form.vars.description = str(Header)
+
+    """
+    The follow code is very important! Because the file stream has already been\
+    read, now you are pointing at the bottom of the file. This code set point at\
+    the top of file so that form.accepts() can read it to store file to database!\
+    If this code is not exist, the file that will be stored in DB will be empty!
+    """
+    request.vars.file_name.file.seek(0)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: data
+# * Task:     controller for "data" page, upload dataset and store it into DB
+# * Input:    
+# * Output:   form, datasets
+# * ----------------------------------------------------------------------------
+               
+def data():
+
+    #removing dataset from data upload page if user press "remove" button
+    if request.args(0) == 'remove':
+        ids = request.vars.ids.split(',')
+        try:
+            for dataset_id in ids:
+                dataset = db(db.datasets.id == dataset_id).select()[0]
+                ori_file_name = dataset.ori_file_name
+                file_name = dataset.file_name
+                p = re.compile('.txt')
+                dir_name = p.sub('',file_name)
+                file_path = os.path.join(request.folder, 'uploads', file_name)
+                try:
+                    os.remove(file_path)
+                except:
+                    print 'Error in deleting file', file_path
+                results = db(db.results.dataset_id == dataset_id).select()
+                for result in results:
+                    dir_path = os.path.join(request.folder, 'static', 'results', str(result.id))
+                    try:
+                        shutil.rmtree(dir_path)
+                    except:
+                        print 'Error in deleting directory', dir_path
+                db(db.datasets.id == dataset_id).delete()
+                db.commit()
+        except:
+            session.data_errors = 'There are some errors when remove dataset(s)'
+        redirect(URL(r = request, f = 'data'))
+
+    else:
+        if 'auth' in globals() and auth.user:
+            uid = auth.user.id
+        else:
+            uid = 0
+
+        db.datasets.username_id.default = uid
+        form = SQLFORM(db.datasets)
+        #perform the corresponding form processing
+        if form.accepts(request.vars, session, onvalidation = pre_upload_processing):
+            session.file_name = form.vars.ori_file_name
+            session.treat_rep = form.vars.rep_number
+            session.header = form.vars.description
+            redirect(URL(r = request, f = 'data'))
+
+        datasets = db(db.datasets.username_id == uid).select(orderby = ~db.datasets.upload_time)
+
+        return dict(form = form, datasets = datasets)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: dataset
+# * Task:     controller for "dataset" page, display dataset information
+# * Input:    
+# * Output:   content and id of datasets
+# * ----------------------------------------------------------------------------
+
+def dataset():
+    ids = request.vars.ids.split(',')
+    datasets = db().select(db.datasets.ALL)
+    return dict(datasets = datasets, ids = ids)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: pre_analyze_processing
+# * Task:     setting parameters from dataset to result item
+# * Input:    
+# * Output:   
+# * ----------------------------------------------------------------------------
+
+def pre_analyze_processing(form):
+    if request.vars.dataset_id != None:
+        dataset = db(db.datasets.id == request.vars.dataset_id).select()[0]
+        form.vars.rep_number = dataset.rep_number
+        form.vars.id = db.results.insert(**dict(form.vars))
+
+
+# * ----------------------------------------------------------------------------
+# * Function: analyze
+# * Task:     controller for "analyse" page, submit an analysis
+# * Input:    
+# * Output:   form for "analyze" view
+# * ----------------------------------------------------------------------------
+
+def analyze():
+
+    if 'auth' in globals() and auth.user:
+        uid = auth.user.id
+    else:
+        uid = 0
+    datasets = db(db.datasets.username_id == uid).select(orderby = ~db.datasets.upload_time)
+
+    form = SQLFORM.factory(
+        Field('dataset_id', requires = IS_IN_SET([dataset.id for dataset in datasets],\
+        labels = [dataset.ori_file_name + ' (' + str(dataset.upload_time) + ')'\
+        for dataset in datasets], zero = None)),
+        Field('sign_level', requires = IS_IN_SET([0.01, 0.05, 0.1], zero = None), default = 0.05),
+        Field('perm_number', requires =  [IS_NOT_EMPTY(error_message = 'Please enter\
+        a number of permutations'), IS_INT_IN_RANGE(50, 10001, error_message = 'Number of\
+        permutations must be an interger in range from 50 to 10,000')], default = 500)
+    )
+
+    if form.accepts(request.vars, session, onvalidation = pre_analyze_processing):
+        file_path = os.path.join(request.folder, 'modules', 'Scheduler.py')
+        os.system('python ' + file_path + ' ' + request.folder + ' &')
+        redirect(URL(r = request, f = 'results'))
+        
+    return dict(form = form)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: results
+# * Task:     controller for "results" page, display result information
+# * Input:    
+# * Output:   content for "results" view
+# * ----------------------------------------------------------------------------
+
+def results():
+    if request.args(0) == 'remove':
+        result = db(db.results.id==request.args[1]).select()[0]
+        dir_path = os.path.join(request.folder, 'static', 'results', str(result.id))
+        try:
+            shutil.rmtree(dir_path)
+        except:
+            print 'Error in deleting directories', dir_path
+        db(db.results.id == request.args[1]).delete()
+        db.commit()
+        redirect(URL(r = request, f = 'results'))
+    else:
+        if 'auth' in globals() and auth.user:
+            uid = auth.user.id
+        else:
+            uid = 0
+        results = db((db.results.dataset_id == db.datasets.id) & (db.datasets.username_id == uid)).select(orderby = ~db.results.id)
+        return dict(results = results)
+
+
+# * *****************************************************************************
+# * -----------------------------------------------------------------------------
+# * Modules for displaying analyzing results
+# * -----------------------------------------------------------------------------
+# * *****************************************************************************
+
+
+# * ----------------------------------------------------------------------------
+# * Function: pre_analyze_processing
+# * Task:     extract name of treatments, number of treatment groups, and number
+# *           of replicates per treatment group
+# * Input:    rep_number: string from "data" form, includes name and number of reps
+# *           for each treatment groups
+# * Output:   nameoftreat, numofrep, numoftreat
+# * ----------------------------------------------------------------------------
+
+def treat_rep(rep_number):
+    temparr = []
+    temparr = rep_number.split("\n")
+    nameoftreat = []
+    numofrep = []
+    for i in range(len(temparr)):
+        temp1 = temparr[i].strip(" ") # remove the leading and trailing whitespaces
+        temp2 = []
+        temp2 = temp1.split(" ")
+        nameoftreat.append(temp2[0]) # name of treatments
+        numofrep.append(int(temp2[1])) # number of replicates per treatment
+    numoftreat = (len(numofrep)) # number of treatments
+    return nameoftreat, numofrep, numoftreat
+
+
+# * ----------------------------------------------------------------------------
+# * Function: overview
+# * Task:     controller for "overview" page, display overview of clusters
+# * Input:    
+# * Output:   content for "overview" view
+# * ----------------------------------------------------------------------------
+
+def overview():
+
+    result = db(db.results.id == request.vars.id).select()[0]
+
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+    treat_rep_str = ""
+    for i in range(len(nameoftreat)):
+        treat_rep_str += str(nameoftreat[i]) + " : " + str(numofrep[i]) + " ;  "
+
+    pd_str = base64.b64decode(result.pattern_dict)
+    pattern_dict = cPickle.loads(pd_str)
+    numofpatterns = len(pattern_dict.keys())
+    numofgenes = 0
+    for keys, values in pattern_dict.iteritems():
+        numofgenes += len(values)
+
+    graph_path = os.path.join('results', str(result.id), 'overview.svg') #path to overview image
+    gene_file_path = os.path.join('results',  str(result.id), 'SignificantGeneList.txt')
+    all_gene_file_path = os.path.join('results',  str(result.id), 'AllGeneList.txt')
+
+    return dict(result = result, treat_rep_str = treat_rep_str, numofpatterns = numofpatterns,\
+                numofgenes = numofgenes, graph_path = graph_path, gene_file_path = gene_file_path,\
+		 all_gene_file_path = all_gene_file_path)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: firstlevel
+# * Task:     controller for "firstlevel" page, display first level of clusters
+# *           (or gene patterns)
+# * Input:    
+# * Output:   content for "firstlevel" view
+# * ----------------------------------------------------------------------------
+
+import base64
+
+def firstlevel():
+
+    result = db(db.results.id == request.vars.id).select()[0]
+
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+    bd_str = base64.b64decode(result.binary_dict)
+    pd_str = base64.b64decode(result.pattern_dict)
+    binary_dict = cPickle.loads(bd_str)
+    pattern_dict = cPickle.loads(pd_str)
+
+    return dict(result = result, numoftreat = numoftreat, nameoftreat = nameoftreat,\
+                numofrep = numofrep, binary_dict = binary_dict, pattern_dict = pattern_dict)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: filteredpatterns
+# * Task:     controller for "filteredpatterns" page, filter patterns with criteria
+# * Input:    
+# * Output:   content for "filteredpatterns" view
+# * ----------------------------------------------------------------------------
+
+def filteredpatterns():
+
+    result = db(db.results.id == request.vars.id).select()[0]
+
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+    bd_str = base64.b64decode(result.binary_dict)
+    pd_str = base64.b64decode(result.pattern_dict)
+    binary_dict = cPickle.loads(bd_str)
+    pattern_dict = cPickle.loads(pd_str)
+
+    return dict(result = result, numoftreat = numoftreat, nameoftreat = nameoftreat,\
+                numofrep = numofrep, binary_dict = binary_dict, pattern_dict = pattern_dict)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: filteredgenes
+# * Task:     controller for "filteredgenes" page, filter genes with criteria
+# * Input:    
+# * Output:   content for "filteredgenes" view
+# * ----------------------------------------------------------------------------
+
+def filteredgenes():
+
+    result = db(db.results.id == request.vars.id).select()[0]
+
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+    bd_str = base64.b64decode(result.binary_dict)
+    pd_str = base64.b64decode(result.pattern_dict)
+    binary_dict = cPickle.loads(bd_str)
+    pattern_dict = cPickle.loads(pd_str)
+
+    return dict(result = result, numoftreat = numoftreat, nameoftreat = nameoftreat,\
+                numofrep = numofrep, binary_dict = binary_dict, pattern_dict = pattern_dict)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: secondlevel
+# * Task:     controller for "secondlevel" page, display second level of clusters
+# *           (or gene meta-patterns)
+# * Input:    
+# * Output:   content for "firstlevel" view
+# * ----------------------------------------------------------------------------
+
+def secondlevel():
+
+    result = db(db.results.id == request.vars.id).select()[0]
+
+    rd_str = base64.b64decode(result.result_dict)
+    syd_str = base64.b64decode(result.symbol_dict)
+    sd_str = base64.b64decode(result.sum_dict)
+    cd_str = base64.b64decode(result.contract_dict)
+
+    result_dict = cPickle.loads(rd_str)
+    symbol_dict = cPickle.loads(syd_str)
+    sum_dict = cPickle.loads(sd_str)
+    contract_dict = cPickle.loads(cd_str)
+
+    return dict(result = result, result_dict = result_dict, symbol_dict = symbol_dict,\
+                sum_dict = sum_dict, contract_dict = contract_dict)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: metacluster
+# * Task:     controller for "metacluster" page, display a meta-pattern
+# * Input:    
+# * Output:   content for "metacluster" view
+# * ----------------------------------------------------------------------------
+
+def metacluster():
+
+    result_id = request.vars.id
+    meta_pattern = request.vars.sb
+    
+    result = db(db.results.id == result_id).select()[0]
+
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+    pd_str = base64.b64decode(result.pattern_dict)
+    rd_str = base64.b64decode(result.result_dict)
+    syd_str = base64.b64decode(result.symbol_dict)
+
+    pattern_dict = cPickle.loads(pd_str)
+    result_dict = cPickle.loads(rd_str)
+    symbol_dict = cPickle.loads(syd_str)
+
+    graph_path = os.path.join('results', str(result.id), 'Firstlevel', 'Secondlevel',\
+                              str(symbol_dict[meta_pattern]) + 'scgraph.svg')
+    gene_file_path = os.path.join('results', str(result.id), 'Firstlevel', 'Secondlevel',\
+                                  str(symbol_dict[meta_pattern]) + 'GeneList.txt')
+
+    return dict(result = result, numoftreat = numoftreat, nameoftreat = nameoftreat,\
+                pattern_dict = pattern_dict, result_dict = result_dict,\
+                symbol_dict = symbol_dict, graph_path = graph_path, gene_file_path = gene_file_path)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: pattern
+# * Task:     controller for "pattern" page, display a pattern
+# * Input:    
+# * Output:   content for "pattern" view
+# * ----------------------------------------------------------------------------
+
+import math
+
+def pattern():
+
+    result_id = request.vars.id
+    pattern = request.vars.p
+    
+    result = db(db.results.id == result_id).select()[0]
+    dataset = db(db.datasets.id==result.dataset_id).select(db.datasets.file_name)[0]
+
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+
+    file_name = dataset.file_name
+    file_path = os.path.join(request.folder, 'uploads', file_name) # dataset file
+
+    try:
+        d = file(file_path).read()
+    except IOError:
+        print "Error in reading file for displaying patterns."
+
+    rowspre = d.split('\n')
+    rows = []
+    for l in rowspre:
+        if l.strip():
+            rows.append(l)
+    NRows = len(rows) # number of rows in the dataset file
+
+    Header = [] # Dataset header
+    probeset = [] # Probeset ID
+    genesymbol = [] # Gene symbol
+    unigeneid = [] # UniGene ID
+    Sgenesymbol = [] # Gene symbol
+    Sunigeneid = [] # UniGene ID
+    reppubid = [] # Representative public ID
+    otherinfo = [] # Gene title, chromosomal location, etc.
+    Expressionmatrix = [] # Expression data
+
+    Header = rows[0].split('\t')
+    for i in range(1, NRows):
+        rowlist = []
+        rowlist = rows[i].split('\t')
+        probeset.append(rowlist[0])
+        genesymbol.append(rowlist[1])
+        unigeneid.append(rowlist[2])
+        reppubid.append(rowlist[3])
+        otherinfo.append(rowlist[4])
+        Expressionmatrix.append(map(float, rowlist[5:]))
+
+        #Filter Gene symbol and UniGene ID for searching
+        gs = rowlist[1].strip()
+        gs = gs.strip('\"')
+        gs = gs.split(' ')
+        p = re.compile('_predicted')
+        gs = p.sub('', gs[0])
+        if gs == '---':
+            Sgenesymbol.append('')
+        else:
+            Sgenesymbol.append(gs)
+
+        ugid = rowlist[2].strip()
+        ugid = ugid.strip('\"')
+        ugid = ugid.split(' ')
+        ugid = p.sub('', ugid[0])
+        Sunigeneid.append(ugid)
+
+    ipd_str = base64.b64decode(result.index_pattern_dict)
+    mcp_str = base64.b64decode(result.monte_carlo_pvalue)
+    pv_str = base64.b64decode(result.pvalue_dict)
+    fc_str = base64.b64decode(result.fold_change_dict)
+
+    index_pattern_dict = cPickle.loads(ipd_str)
+    monte_carlo_pvalue = cPickle.loads(mcp_str)
+    pvalue_dict = cPickle.loads(pv_str)
+    fold_change_dict = cPickle.loads(fc_str)
+    
+    fold_change_mean = []
+    fold_samp_std_dev = []
+    N = len(index_pattern_dict[pattern])
+    for i in range(numoftreat-1):
+        f_sum = 0.0
+        for index in index_pattern_dict[pattern]:
+            f_sum += fold_change_dict[index][i]
+        f_mean = f_sum / N
+        fold_change_mean.append(f_mean)
+        f_sq_sum = 0.0
+        for index in index_pattern_dict[pattern]:
+            f_sq_sum += (fold_change_dict[index][i] - f_mean)**2
+        if N > 1:
+		fold_samp_std_dev.append(math.sqrt(f_sq_sum/(N - 1)))
+	else:
+		fold_samp_std_dev.append(0)
+
+    genemania_list = ""
+    david_list = ""
+    gcat_list = ""
+
+    count = 0
+    for index in index_pattern_dict[pattern]:
+        if count < len(index_pattern_dict)-1:
+            genemania_list = genemania_list + str(Sgenesymbol[int(index)]) + "|"
+            david_list = david_list + str(probeset[int(index)]) + ","
+            gcat_list = gcat_list + str(Sgenesymbol[int(index)]) + "+"
+        else:
+            genemania_list = genemania_list + str(Sgenesymbol[int(index)])
+            david_list = david_list + str(probeset[int(index)])
+            gcat_list = gcat_list + str(Sgenesymbol[int(index)])
+        count += 1
+
+    meanvalues = {}
+    for index in index_pattern_dict[pattern]:
+        meanvalues[index] = Methods.Mean(Expressionmatrix[index])
+
+    meantuple = {}
+    meantuple = Methods.sortbyvalue(meanvalues, reverse = True)
+
+    graph_path = os.path.join('results', str(result.id), 'Firstlevel', pattern + 'graph.png')
+    gene_file_path = os.path.join('results', str(result.id), 'Firstlevel', pattern + 'GeneList.txt')
+
+    return dict(result = result, numoftreat = numoftreat, nameoftreat = nameoftreat, numofrep = numofrep,\
+                probeset = probeset, genesymbol = genesymbol, unigeneid = unigeneid, reppubid = reppubid,\
+                otherinfo = otherinfo, Sgenesymbol = Sgenesymbol, Sunigeneid = Sunigeneid,\
+                fold_change_mean = fold_change_mean, fold_samp_std_dev = fold_samp_std_dev,\
+                monte_carlo_pvalue = monte_carlo_pvalue, pvalue_dict = pvalue_dict, meantuple = meantuple,\
+                fold_change_dict = fold_change_dict, genemania_list = genemania_list, david_list = david_list,\
+                gcat_list = gcat_list, graph_path = graph_path, gene_file_path = gene_file_path)
+
+
+# * ----------------------------------------------------------------------------
+# * Function: fcgraph
+# * Task:     controller for "fcgraph" page, displaying fold-change graph for a pattern
+# * Input:    
+# * Output:   content for "fcgraph" view
+# * ----------------------------------------------------------------------------
+
+def fcgraph():
+    result = db(db.results.id == request.vars.id).select()[0]
+    nameoftreat, numofrep, numoftreat = treat_rep(str(result.rep_number))
+    fc_str = base64.b64decode(result.fold_change_dict)
+    fold_change_dict = cPickle.loads(fc_str)
+    fc_array = fold_change_dict[int(request.vars.index)]
+    return dict(numoftreat = numoftreat, nameoftreat = nameoftreat, numofrep = numofrep, fc_array = fc_array)

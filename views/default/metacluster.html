@@ -1,0 +1,101 @@
+{{extend 'layout.html'}}
+{{
+import sys
+import os
+import re
+import gc
+Methods = local_import('Methods', reload = True)
+
+symbol = request.vars.sb
+}}
+<br />
+<h2>
+	<a href="{{=URL(r=request, f='firstlevel', vars=dict(id=result.id))}}">Clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='secondlevel', vars=dict(id=result.id))}}">Meta-clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='overview', vars=dict(id=result.id))}}">All patterns as directed graph</a>
+</h2>
+<hr />
+
+<br />
+<h4 style="text-align:leftr">Clusters in meta-cluster {{=str(symbol)}}</h4>
+<br />
+<div align="left" class="thumbnail">
+	<a href="{{=URL(r = request, c = 'static', f = graph_path)}}"
+	 title="Set of 'up-regulated' or 'down-regulated' clusters">
+		<img src="{{=URL(r=request, c='static', f=graph_path)}}" height="300"
+		 alt="No image. Please reload the page"/>
+	</a>
+</div>
+
+    
+<br />
+<br />
+<b>Detail information about patterns:</b>
+<br/>
+(Click on the header of each column to sort that column, click on the pattern names to see more information)
+<br />
+<br />
+<a href = "{{=URL(r = request, c = 'static', f = gene_file_path)}}" target="_blank">
+	<b>Download</a> this Gene List</b>
+<br />
+<br />
+<table class="sortable" cellspacing="10" border="0">
+	<tr>
+		<td>
+			<b>Pattern</b>
+		</td>
+		<td>
+			<b>Number of genes</b>
+		</td>
+		<td>
+			<b>Pattern as directed graph</b>
+		</td>
+	</tr>
+
+{{
+allpatterns = []
+Allpattern = {}
+allpatterns = result_dict[symbol]
+
+for eachpattern in allpatterns:
+    Allpattern[eachpattern] = len(pattern_dict[eachpattern])
+pass
+    
+sortvaluelist = []
+sortvaluelist = sorted(Allpattern, key = Allpattern.__getitem__, reverse= True)
+
+for pattern in sortvaluelist:
+	if Methods.Contractibility(numoftreat,str(pattern)):
+}}
+
+	<tr>
+		<td>
+			{{=pattern}}
+		</td>
+		<td>
+			{{=str(len(pattern_dict[pattern]))}}
+		</td>
+		<td>
+			<a href="{{=URL(r=request,f='pattern', vars=dict(id=result.id, p=pattern))}}">{{=Methods.ContractiveTopologicalSorting(numoftreat, nameoftreat, pattern)}}</a>
+		</td>
+	</tr>
+
+    	{{else:}}
+
+	<tr>
+		<td>
+			{{=pattern}}
+		</td>
+		<td>
+			{{=str(len(pattern_dict[pattern]))}}
+		</td>
+		<td>
+			<a href="{{=URL(r=request,f='pattern', vars=dict(id=result.id, p=pattern))}}"><i>Not contractible</i></a>
+		</td>
+	</tr>
+	{{pass}}
+{{pass}}
+
+</table>

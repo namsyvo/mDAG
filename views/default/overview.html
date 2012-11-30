@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+<br />
+<h2>
+	<a href="{{=URL(r=request, f='firstlevel', vars=dict(id=result.id))}}">Clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='secondlevel', vars=dict(id=result.id))}}">Meta-clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<font color=red>All patterns as directed graph</font>
+</h2>
+<hr />
+<h4>General information</h4>
+<ul>
+	<li>Treatment groups with number of replicates:   {{=treat_rep_str}}
+	<li>Number of significant genes: {{=numofgenes}} (with FDR rate: {{=result.sign_level}})
+	<li>Number of clusters: {{=numofpatterns}}
+</ul>
+<br />
+<a href = "{{=URL(r=request, f='dataset', vars=dict(ids=result.dataset_id))}}"><b>Dataset description</b></a>
+<br />
+<a href = "{{=URL(r=request, c='static', f=gene_file_path)}}" target="_blank"><b>Download</a> list of significant genes with related information</b>
+<br />
+<a href = "{{=URL(r=request, c='static', f=gene_file_path)}}" target="_blank"><b>Download</a> list of all genes</b>
+<br />
+<br />
+<a href="{{=URL(r=request, c='static', f=graph_path)}}">
+	<img src="{{=URL(r=request, c='static', f=graph_path)}}" width="900" align="center" /></a>

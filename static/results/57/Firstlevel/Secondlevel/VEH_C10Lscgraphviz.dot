@@ -1,0 +1,22 @@
+strict digraph FirstlevelCluster {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+	label= ">VEH~C10";
+		subgraph	cluster_2 {
+		label = "212012";
+			style = filled;
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH2;
+			node	[label = C3, shape = plaintext, fontsize = 16] C32;
+			node	[label = C10, shape = plaintext, fontsize = 16] C102;
+			node	[label = C30, shape = plaintext, fontsize = 16] C302;
+			C32->VEH2;C32->C102;C302->VEH2;C302->C102;			}
+		subgraph	cluster_3 {
+		label = "212022";
+			style = filled;
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH3;
+			node	[label = C3, shape = plaintext, fontsize = 16] C33;
+			node	[label = C10, shape = plaintext, fontsize = 16] C103;
+			node	[label = C30, shape = plaintext, fontsize = 16] C303;
+			C33->VEH3;C33->C103;C303->VEH3;C303->C33;C303->C103;			}
+}}

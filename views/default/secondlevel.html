@@ -1,0 +1,39 @@
+{{extend 'layout.html'}}
+{{
+import sys
+import os
+import re
+import gc
+}}
+<br />
+<h2>
+	<a href="{{=URL(r=request, f='firstlevel', vars=dict(id=result.id))}}">Clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<font color=red>Meta-clusters</font>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='overview', vars=dict(id=result.id))}}">
+	All patterns as directed graph</a>
+</h2>
+<hr />
+<i>Click on the header of each column to sort that column.
+ Click on the meta-cluster names to see more information.</i>
+<br/><br/>
+<table  class=\"sortable\" cellspacing=\"10\">
+	<tr>
+		<td><b>Meta-cluster</b></td>
+		<td><b>Number of Clusters</b></td>
+		<td><b>Total of Genes</b></td>
+		<td><b>Contractible Ratio</b></td>
+	</tr>
+
+	{{for symbol in symbol_dict:}}
+	<tr>
+		<td><a href="{{=URL(r=request, f='metacluster',
+		 vars=dict(id=result.id, sb=symbol))}}">{{=str(symbol)}}</a></td>
+		<td>{{=str(len(result_dict[symbol]))}}</td>
+		<td>{{=str(sum_dict[symbol])}}</td>
+		<td>{{=str(contract_dict[symbol])}}</td>
+	</tr>
+	{{pass}}
+</table>
+

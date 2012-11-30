@@ -1,0 +1,77 @@
+1. Installation instruction:
+1.1 Group version (run on a Linux server):
+    - Install Python 2.6+
+    - Install a non-standard Python library:
+    psutil
+    - Install third-party packages:
+	Graphviz
+	sqlite3
+	MySQL
+    - Configure Apache to run mDAG
+
+    - Follow the instruction in the website.
+
+1.2 Personal version (run on a Linux machine):
+    - Install Python, Graphviz.
+    - Download the mDAG software and extract into a directory, for example /home/, the result will be the directory /home/mdag
+    - Go to /home/mdag and run mDAG internal server as following: python web2py.py
+    - Enter a password for this server and press "start server", the mdag website will display in your default web browser.
+    - Follow the instruction in the website.
+
+2. File structure:
+	\models
+		db.py
+		menu.py
+	\database
+		storage.db
+		sql.log
+		<db tables of the app>
+	\views
+		\default
+			index.html
+			data.html
+			analyze.html
+			results.html
+			overview.html
+			firstlevel.html
+			pattern.html
+			filteredgene.html
+			filteredpatterns.html
+			secondlevel.html
+			metacluster.html
+			dataset.html
+			fcgraph.html
+			user.html
+		\others
+			downloads.html
+			help.html
+			references.html
+		appadmin.html
+		<other standard web2py files>
+	\controllers
+		appadmin.py
+		default.py
+		others.py
+	\modules
+		Scheduler.py
+		Executer.py
+		Methods.py
+		prettydate.py <third-party packages>
+	\static
+		\css
+			base.css
+			<other standard web2py files>
+		\js
+			jqBarGraph.js
+			jquery.js
+			sorttable.js
+			<other standard web2py files>
+		\downloads
+		\images
+		\results
+			<result folders>
+		\sampledata
+	<other standard web2py files>
+
+3. Functionals:
+	See the Help page of the app after installing

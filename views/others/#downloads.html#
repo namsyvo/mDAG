@@ -1,0 +1,57 @@
+{{extend 'layout.html'}}
+
+<p>
+<a name="software"></a>
+<!--
+<h3>Personal version (running on a Windows computer)</h3>
+
+The followings are needed for a personal Windows-version of mDAG:
+<ul>
+  <li><a href="http://python.org/download">Python 2.6+</a></li>
+  <li><a href="http://www.graphviz.org/Download..php">Graphviz</a></li>
+  <li><a href="{{=URL(request.application, 'static/downloads', 'mDAG-web2py-windows.tar.gz')}}">mDAG</a></li>
+</ul>
+</p>
+
+<p>
+<h3>Group-sharing version (running on a Linux server)</h3>
+-->
+
+<h3>Personal version of mDAG (running on a Linux computer)</h3>
+The followings are needed for a personal Linux-version of mDAG, please choose a proper package for your computer.
+<ul>
+  <li><a href="http://python.org/download">Python 2.6+ (for Linux)</a></li>
+  <li><a href="http://www.graphviz.org/Download..php">Graphviz (for Linux)</a></li>
+  <li><a href="{{=URL(request.application, 'static/downloads', 'mdag-linux.tar.gz')}}">mDAG</a></li>
+</ul>
+Installing mDAG:
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+The first registered user will be an administrator, the next registered users will be normal users. 
+
+</ul>
+
+<a name="sampledata"></a>
+<br />
+<h3>Sample datasets:</h3>
+We supply here some sample datasets (text files).
+<br />
+<table>
+    <tr>
+    	<td><b>Dataset</b><td>
+    	<td><b>Description</b></td>
+    </tr>
+{{i=0}}
+{{for dataset in datasets:}}
+    {{i=i+1}}
+    <tr>
+	{{file_name, file_new_name = db.sampledata.file_name.retrieve(dataset.file_name)}}
+    	<td width="40%">({{=i}}) <a href="{{=URL(r=request, f='download', args=dataset.file_name)}}">{{=file_name}}</a><td>
+    	<td width="60%">{{=dataset.description}}</td>
+    </tr>
+{{pass}}
+</table>
+<br />
+<a href="http://www.broadinstitute.org/gsea/datasets.jsp">Additional data sets </a> (they should be adapted to <a href="{{=URL(c='others', f='data')}}">mDAG format</a>).

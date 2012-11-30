@@ -1,0 +1,193 @@
+{{extend 'layout.html'}}
+{{
+import sys
+import os
+import re
+import gc
+Methods = local_import('Methods', reload = True)
+def match(pat, *queries):
+	pattern = list(pat)
+	return all(pattern[int(query[0])] in query[1:] for query in queries)
+pass
+}}
+<br />
+<h2>
+	<a href="{{=URL(r=request, f='firstlevel', vars=dict(id=result.id))}}">
+	<font color=red>Clusters</font></a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='secondlevel', vars=dict(id=result.id))}}">
+	Meta-clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='overview', vars=dict(id=result.id))}}">
+	All patterns as directed graph</a>
+</h2>
+<hr />
+
+{{
+genelist = request.vars.genelist.split(',')
+queries = []
+for gene in genelist:
+	query = []
+	query.append(gene)
+	query.extend(gene)
+	queries.append(query)
+pass
+Binaryarray = binary_dict.keys()
+Binaryarray.sort(lambda a,b: cmp(int(a), int(b)))
+}}
+
+<b>Patterns after filtering:</b>
+<br />
+<br />
+
+<i>Click on the header of each column to sort that column.
+ Click on the pattern names to see more information.</i>
+<br />
+<br />
+<table class="sortable" cellspacing="10">
+	<tr>
+		<td>
+			<b>Pattern</b>
+		</td>
+		<td>
+			<b>Number of Genes</b>
+		</td>
+		<td>
+			<b>Pattern as directed graph</b>
+		</td>
+		<td>
+			<b>Meta-cluster of pattern</b>
+		</td>
+	</tr>
+
+{{
+ids = 1
+
+printedcompkey = []
+
+for numkey in Binaryarray:
+
+	key = binary_dict[numkey]
+	compkey = Methods.comppattern(key)
+
+	if key not in printedcompkey:
+	if match(key, *queries):
+	    request.args = [result.id, key]
+		metacluster = Methods.MetaCluster(nameoftreat, numoftreat, key)
+		if Methods.Contractibility(numoftreat, key):
+}}
+	<tr>
+		<td>
+			{{=key}}
+		</td>
+		<td>
+			{{=len(pattern_dict[key])}}
+		</td>
+		<td>
+			<a href="{{=URL(r=request, f='pattern', vars=dict(id=result.id, p=key))}}">
+			{{=Methods.ContractiveTopologicalSorting(numoftreat, nameoftreat, key)}}</a>
+		</td>
+		{{if metacluster == '':}}
+		<td>
+			<i>N/A</i>
+		</td>
+		{{else:}}
+		<td>
+			<a href="{{=URL(r=request, f='metacluster', vars=dict(id=result.id, sb=metacluster))}}">
+			{{=metacluster}}</a>
+		</td>
+		{{pass}}
+	</tr>
+		{{else:}}
+	<tr>
+		<td>
+			{{=key}}
+		</td>
+		<td>
+			{{=len(pattern_dict[key])}}
+		</td>
+		<td>
+			<a href="{{=URL(r=request, f='pattern', vars=dict(id=result.id, p=key))}}">
+			<i>Not contractible</i></a>
+		</td>
+		{{if metacluster == '':}}
+		<td>
+			<i>N/A</i>
+		</td>
+		{{else:}}
+		<td>
+			<a href="{{=URL(r=request, f='metacluster', vars=dict(id=result.id, sb=metacluster))}}">
+			{{=metacluster}}</a>
+		</td>
+		{{pass}}
+	</tr>
+		{{pass}}
+		
+		{{
+		ids = ids + 1
+    
+		if compkey in pattern_dict.keys():
+		if match(compkey, *queries):
+	        	request.args = [result.id, compkey]
+			metacluster = Methods.MetaCluster(nameoftreat, numoftreat, compkey)
+			if Methods.Contractibility(numoftreat, compkey):
+		}}
+	<tr>
+		<td>
+			{{=compkey}}
+		</td>
+		<td>
+			{{=len(pattern_dict[compkey])}}
+		</td>
+		<td>
+			<a href="{{=URL(r=request,f='pattern', vars=dict(id=result.id, p=compkey))}}">
+			{{=Methods.ContractiveTopologicalSorting(numoftreat, nameoftreat, compkey)}}</a>
+		</td>
+		{{if metacluster == '':}}
+		<td>
+			<i>N/A</i>
+		</td>
+		{{else:}}
+		<td>
+			<a href="{{=URL(r=request, f='metacluster', vars=dict(id=result.id, sb=metacluster))}}">
+			{{=metacluster}}</a>
+		</td>
+		{{pass}}
+	</tr>
+			{{else:}}
+	<tr>
+		<td>
+			{{=compkey}}
+		</td>
+		<td>
+			{{=len(pattern_dict[compkey])}}
+		</td>
+		<td>
+			<a href="{{=URL(r=request,f='pattern', vars=dict(id=result.id, p=compkey))}}">
+			<i>Not contractible</i></a>
+		</td>
+		{{if metacluster == '':}}
+		<td>
+			<i>N/A</i>
+		</td>
+		{{else:}}
+		<td>
+			<a href="{{=URL(r=request, f='metacluster', vars=dict(id=result.id, sb=metacluster))}}">
+			{{=metacluster}}</a>
+		</td>
+		{{pass}}
+	</tr>
+			{{pass}}
+
+			{{
+        		printedcompkey.append(compkey)
+			ids = ids + 1
+
+		pass
+		pass
+	pass
+	pass
+pass
+}}
+
+</table>

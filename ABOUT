@@ -1,0 +1,8 @@
+mDAG is free software written in Python, using web2py framework, with all major
+browsers supported. For database storage, it can be configured to use SQLite, MySQL,
+Postgres, or a variety of database management systems.
+
+mDAG can be configured as a desktop application with web-interface for personal usage
+or installed on a server as an online service for group usage (run on Linux machines).
+
+Contact: Vinhthuy Phan <vphan@memphis.edu>

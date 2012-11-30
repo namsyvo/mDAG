@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+
+<br />
+<h3><font color=blue>Dataset description:</font></h3>
+<br />
+<ul>
+{{for dataset in datasets:}}
+	{{if str(dataset.id) in ids:}}
+	<li>Dataset file: <a href="{{=URL(r = request, f = 'downloads', args = dataset.file_name)}}">
+	{{=dataset.ori_file_name}}</a></h4>
+		<ul>
+			<li>Upload time:  <font color=blue>{{=dataset.upload_time}}</font></li>
+			<li>Treatment groups with number of replicates:  <font color=blue>
+			{{=dataset.rep_number}}</font></li>
+			<li>Header of file:  <font color=blue>{{=dataset.description}}</font></li>
+		</ul>
+	</li>
+	{{pass}}
+{{pass}}
+</ul>
+<br />
+

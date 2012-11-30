@@ -1,0 +1,107 @@
+{{extend 'layout.html'}}
+
+{{
+import os
+import re
+from datetime import datetime
+from datetime import timedelta
+
+"""
+reload = True for reloading when there is update with Methods file,
+if no, it still use the old version until the server will be restarted.
+It will be set to False when deploy the software for running faster
+"""
+Methods = local_import('Methods', reload = True)
+
+prettydate = local_import('prettydate', reload = True)
+
+i=len(results)
+}}
+
+<script>
+    $(function() {
+        $('.remove').click(function() {
+            return confirm("Are you sure you want to remove this result?");
+        });
+    });
+</script>
+
+{{if i < 1:}}
+	<br />
+        <h3>There is no result.</h3>
+{{else:}}
+	<br />
+	<table>
+	    <tr>
+	      <td><h4>Dataset</h4></td>
+	      <td><h4>Upload</h4></td>
+	      <td><h4>Parameters</h4></td>
+	      <td><h4>Submit</h4></td>
+	      <td><h4>Start</h4></td>
+	      <td><h4>Finish</h4></td>
+	      <td><h4>Status</h4></td>
+	{{if 'auth' in globals() and auth.user:}}
+	      <td><h4>Remove</h4></td>
+	{{pass}}
+	    </tr>
+        {{for result in results:}}
+            <tr>
+                <td width=30%>({{=i}}) {{=A(result.datasets.ori_file_name,
+                 _href=URL(r=request, f='dataset', vars=dict(ids=result.datasets.id)))}}
+
+			{{past_time = prettydate.date(result.datasets.upload_time)}}
+                <td width=15%>{{=past_time}}</td>
+
+                <td width=15%>FDR: {{=result.results.sign_level}}<br />
+                	Perm: {{=result.results.perm_number}}</td>
+
+			{{past_time = prettydate.date(result.results.upload_time)}}
+                <td width=15%>{{=past_time}}</td>
+
+            {{if (result.results.status=='Waiting'):}}
+                <td width=15%>Waiting...</td>
+                <td width=15%>Waiting...</td>
+
+            {{elif (result.results.status=='Running'):}}
+				{{past_time = prettydate.date(result.results.start_time)}}
+                <td width=10%>{{=past_time}}</td>
+				{{if result.results.description == '':}}
+                <td width=15%><font color=blue>Waiting...</font></td>
+				{{else:
+				total_seconds = int (result.results.description)
+				past_duration = datetime.now() - result.results.start_time
+				past_seconds = int (past_duration.seconds)
+				remaining_time = 1 + (total_seconds - past_seconds)/60
+				}}
+                <td width=15%><font color=blue>After about {{=remaining_time}} minute(s)</font></td>
+				{{pass}}
+
+		    {{else:}}
+				{{past_time = prettydate.date(result.results.start_time)}}
+                <td width=15%>{{=past_time}}</td>
+				{{past_time = prettydate.date(result.results.finish_time)}}
+                <td width=15%>{{=past_time}}</td>
+		    {{pass}}
+			
+            {{if result.results.status=='Completed':}}
+                <td width=10%><b>{{=A("Completed",
+                 _href=URL(r=request, f='firstlevel', vars=dict(id=result.results.id)))}}</b></td>
+            {{else:}}
+                <td width=10%><b><font color=blue>{{=result.results.status}}</font></b></td>
+            {{pass}}
+
+            {{if (result.results.status=='Waiting') | (result.results.status=='Running'):}}
+                <td width=10%></td>
+            {{else:}}
+		{{if 'auth' in globals() and auth.user:}}
+		        {{request.args = ['remove', result.results.id]}}
+                <td width=10%><b>{{=A("Remove",
+                 _href=URL(r=request, f='results', args=request.args), _class='remove')}}</b></td>
+		{{pass}}
+            {{pass}}
+            </tr>
+
+            {{i=i-1}}
+	{{pass}}
+	</table>
+{{pass}}

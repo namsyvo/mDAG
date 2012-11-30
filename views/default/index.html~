@@ -1,0 +1,30 @@
+{{extend 'layout.html'}}
+
+<p>
+<font color="green"><h2>mDAG</h2></font>
+<p>is a web-based tool for <strong>analyzing</strong> and <strong>visualizing</strong> patterns of gene response to <strong>multiple treatments</strong> in microarray data. Patterns are represented using <strong>directed graphs</strong>, which capture precisely primary and subtle gene responses to all treatments. Genes with the same patterns in mDAG hypothetically share similar biological functions or are related on some ways as confirmed by several <a href="{{=URL(c='others', f='references')}}">related works</a>. Users can filter patterns to select how genes respond specifically to individual treatments (<i>affected or not affected, up-regulated or down-regulated by a treatment</i>). Users can also filter patterns based on probe-set ids, gene symbols, uni gene ids, or accession numbers. Gene lists and related necessary information can be downloaded in a proper format and might be further analyzed using tools that allows users to analyze gene funtions based on user-input gene lists. mDAG also incorporates several well-establised tools including <a href="http://david.abcc.ncifcrf.gov/">DAVID</a>, <a href="http://genemania.org/">GeneMANIA</a>, and <a href="http://binf1.memphis.edu/gcat/">GCAT</a> to help users exploit these tools more conveniently. The tool will be useful in helping users verify various hypotheses about gene functions based on gene expression data.
+
+<p>
+<font color="green"><h2 align="center">How to use mDAG?</h2></font>
+
+<ul>
+  <li>Start your analysis by <a href="{{=URL(c='default', f='data')}}">submitting</a> a dataset. Please use the following <a href="{{=URL(c='others', f='data')}}">format</a> for your dataset. You can use one of the <a href="{{=URL(c='others', f='downloads', anchor='sampledata')}}">sample data sets</a> while learning how to use the software.</li>
+
+  <li>If you have already submitted a dataset, you can <a href="{{=URL(c='default', f='analyze')}}">analyze</a> it with proper parameters.
+  <li>Go to <a href="{{=URL(c='default', f='results')}}">result page</a> to see whether your analyses are completed. If not, the system will show the approximate remaining time needed to finish the analyses. Otherwise, you can start to work on the analysis result of your datasets.
+<p>To understand more about the meaning of the result, you can take a <a href="{{=URL(c='others', f='help', anchor='mdag')}}">tutorial</a> about mDAG. The following is a snapshot of an analysis result:
+<p align="center"><img width="95%" src="{{=URL(request.application, 'static/images', 'graphs.jpg')}}" align="center">
+
+<div>
+{{if 'auth' in globals() and not auth.user:}}
+<p>
+<h3>Registration</h3>
+You are currently not logged in. You can use the online version of mDAG without logging in but people will see your data and results of analyses. Please <a href="{{=URL(r=request,f='user',args='register')}}">Register</a> and
+<a href="{{=URL(r=request,f='user',args='login')}}">Login</a>, if you do not want your data publically
+viewable. For testing purposes, you can use the demo account (email: demo@memphis.edu, password: demo) but please do not use datasets with more than 100 genes or 4 treatments.
+{{pass}}
+
+<p>
+<h3>A personal version of mDAG</h3>
+In addition to the online version, mDAG can be run as a stand-alone application on a personal computer for individual usage. You can <a href="{{=URL(c='others', f='downloads', anchor='software')}}">download</a> this software and install on your (Linux) computer to use it via a web interface. A version for Windows computer will be provided soon.
+</div>

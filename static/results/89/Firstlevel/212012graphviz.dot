@@ -1,0 +1,9 @@
+strict digraph DAGS {
+	size = "4,4!" ; ratio ="fill"; subgraph cluster_0{
+			labeldoc = "t";
+			label = "212012";node	[label= CON, shape = plaintext, fontsize=20] CON;node	[label= BNF, shape = plaintext, fontsize=20] BNF;node	[label= D3T, shape = plaintext, fontsize=20] D3T;node	[label= OLT, shape = plaintext, fontsize=20] OLT;
+BNF->CON;
+BNF->D3T;
+OLT->CON;
+OLT->D3T;
+	}}

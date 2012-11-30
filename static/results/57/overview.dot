@@ -1,0 +1,1203 @@
+strict digraph TDAGS {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+		subgraph cluster_1 {
+			label= "101012";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH1;
+			node [label= C3, shape = plaintext, fontsize=12] C31;
+			node [label= C10, shape = plaintext, fontsize=12] C101;
+			node [label= C30, shape = plaintext, fontsize=12] C301;
+			VEH1->C101;C31->C101;C301->C101;		}
+		subgraph cluster_2 {
+			label= "110100";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH2;
+			node [label= C3, shape = plaintext, fontsize=12] C32;
+			node [label= C10, shape = plaintext, fontsize=12] C102;
+			node [label= C30, shape = plaintext, fontsize=12] C302;
+			VEH2->C302;C32->C302;C102->C302;		}
+		subgraph cluster_3 {
+			label= "121210";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH3;
+			node [label= C3, shape = plaintext, fontsize=12] C33;
+			node [label= C10, shape = plaintext, fontsize=12] C103;
+			node [label= C30, shape = plaintext, fontsize=12] C303;
+			C103->VEH3;C103->C33;C103->C303;		}
+		subgraph cluster_4 {
+			label= "100001";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH4;
+			node [label= C3, shape = plaintext, fontsize=12] C34;
+			node [label= C10, shape = plaintext, fontsize=12] C104;
+			node [label= C30, shape = plaintext, fontsize=12] C304;
+			VEH4->C104;VEH4->C304;C34->C104;C34->C304;		}
+		subgraph cluster_5 {
+			label= "222111";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH5;
+			node [label= C3, shape = plaintext, fontsize=12] C35;
+			node [label= C10, shape = plaintext, fontsize=12] C105;
+			node [label= C30, shape = plaintext, fontsize=12] C305;
+			C35->VEH5;C105->VEH5;C305->VEH5;		}
+		subgraph cluster_6 {
+			label= "000111";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH6;
+			node [label= C3, shape = plaintext, fontsize=12] C36;
+			node [label= C10, shape = plaintext, fontsize=12] C106;
+			node [label= C30, shape = plaintext, fontsize=12] C306;
+			VEH6->C36;VEH6->C106;VEH6->C306;		}
+		subgraph cluster_7 {
+			label= "100002";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH7;
+			node [label= C3, shape = plaintext, fontsize=12] C37;
+			node [label= C10, shape = plaintext, fontsize=12] C107;
+			node [label= C30, shape = plaintext, fontsize=12] C307;
+			VEH7->C107;VEH7->C307;C37->C107;C37->C307;C307->C107;		}
+		subgraph cluster_8 {
+			label= "100101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH8;
+			node [label= C3, shape = plaintext, fontsize=12] C38;
+			node [label= C10, shape = plaintext, fontsize=12] C108;
+			node [label= C30, shape = plaintext, fontsize=12] C308;
+			VEH8->C108;VEH8->C308;C38->C308;		}
+		subgraph cluster_9 {
+			label= "110101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH9;
+			node [label= C3, shape = plaintext, fontsize=12] C39;
+			node [label= C10, shape = plaintext, fontsize=12] C109;
+			node [label= C30, shape = plaintext, fontsize=12] C309;
+			VEH9->C309;C39->C309;		}
+		subgraph cluster_10 {
+			label= "100011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH10;
+			node [label= C3, shape = plaintext, fontsize=12] C310;
+			node [label= C10, shape = plaintext, fontsize=12] C1010;
+			node [label= C30, shape = plaintext, fontsize=12] C3010;
+			VEH10->C1010;VEH10->C3010;C310->C1010;		}
+		subgraph cluster_11 {
+			label= "112122";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH11;
+			node [label= C3, shape = plaintext, fontsize=12] C311;
+			node [label= C10, shape = plaintext, fontsize=12] C1011;
+			node [label= C30, shape = plaintext, fontsize=12] C3011;
+			C3011->VEH11;C3011->C311;C3011->C1011;		}
+		subgraph cluster_12 {
+			label= "110110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH12;
+			node [label= C3, shape = plaintext, fontsize=12] C312;
+			node [label= C10, shape = plaintext, fontsize=12] C1012;
+			node [label= C30, shape = plaintext, fontsize=12] C3012;
+			VEH12->C3012;C1012->C3012;		}
+		subgraph cluster_13 {
+			label= "100111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH13;
+			node [label= C3, shape = plaintext, fontsize=12] C313;
+			node [label= C10, shape = plaintext, fontsize=12] C1013;
+			node [label= C30, shape = plaintext, fontsize=12] C3013;
+			VEH13->C1013;VEH13->C3013;		}
+		subgraph cluster_14 {
+			label= "101011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH14;
+			node [label= C3, shape = plaintext, fontsize=12] C314;
+			node [label= C10, shape = plaintext, fontsize=12] C1014;
+			node [label= C30, shape = plaintext, fontsize=12] C3014;
+			VEH14->C1014;C314->C1014;		}
+		subgraph cluster_15 {
+			label= "121110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH15;
+			node [label= C3, shape = plaintext, fontsize=12] C315;
+			node [label= C10, shape = plaintext, fontsize=12] C1015;
+			node [label= C30, shape = plaintext, fontsize=12] C3015;
+			C1015->VEH15;C1015->C3015;		}
+		subgraph cluster_16 {
+			label= "101002";
+node [label= VEH, shape = plaintext, fontsize=12] VEH16;
+			node [label= C3, shape = plaintext, fontsize=12] C316;
+			node [label= C10, shape = plaintext, fontsize=12] C1016;
+			node [label= C30, shape = plaintext, fontsize=12] C3016;
+			VEH16->C1016;C316->C1016;C316->C3016;C3016->C1016;		}
+		subgraph cluster_17 {
+			label= "121200";
+node [label= VEH, shape = plaintext, fontsize=12] VEH17;
+			node [label= C3, shape = plaintext, fontsize=12] C317;
+			node [label= C10, shape = plaintext, fontsize=12] C1017;
+			node [label= C30, shape = plaintext, fontsize=12] C3017;
+			C317->C3017;C1017->VEH17;C1017->C317;C1017->C3017;		}
+		subgraph cluster_18 {
+			label= "121211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH18;
+			node [label= C3, shape = plaintext, fontsize=12] C318;
+			node [label= C10, shape = plaintext, fontsize=12] C1018;
+			node [label= C30, shape = plaintext, fontsize=12] C3018;
+			C1018->VEH18;C1018->C318;		}
+		subgraph cluster_19 {
+			label= "122221";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH19;
+			node [label= C3, shape = plaintext, fontsize=12] C319;
+			node [label= C10, shape = plaintext, fontsize=12] C1019;
+			node [label= C30, shape = plaintext, fontsize=12] C3019;
+			C1019->VEH19;C1019->C319;C3019->VEH19;C3019->C319;		}
+		subgraph cluster_20 {
+			label= "000100";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH20;
+			node [label= C3, shape = plaintext, fontsize=12] C320;
+			node [label= C10, shape = plaintext, fontsize=12] C1020;
+			node [label= C30, shape = plaintext, fontsize=12] C3020;
+			VEH20->C320;VEH20->C1020;VEH20->C3020;C320->C3020;C1020->C3020;		}
+		subgraph cluster_21 {
+			label= "100100";
+node [label= VEH, shape = plaintext, fontsize=12] VEH21;
+			node [label= C3, shape = plaintext, fontsize=12] C321;
+			node [label= C10, shape = plaintext, fontsize=12] C1021;
+			node [label= C30, shape = plaintext, fontsize=12] C3021;
+			VEH21->C1021;VEH21->C3021;C321->C3021;C1021->C3021;		}
+		subgraph cluster_22 {
+			label= "100012";
+node [label= VEH, shape = plaintext, fontsize=12] VEH22;
+			node [label= C3, shape = plaintext, fontsize=12] C322;
+			node [label= C10, shape = plaintext, fontsize=12] C1022;
+			node [label= C30, shape = plaintext, fontsize=12] C3022;
+			VEH22->C1022;VEH22->C3022;C322->C1022;C3022->C1022;		}
+		subgraph cluster_23 {
+			label= "221100";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH23;
+			node [label= C3, shape = plaintext, fontsize=12] C323;
+			node [label= C10, shape = plaintext, fontsize=12] C1023;
+			node [label= C30, shape = plaintext, fontsize=12] C3023;
+			C323->VEH23;C323->C3023;C1023->VEH23;C1023->C3023;		}
+		subgraph cluster_24 {
+			label= "010100";
+node [label= VEH, shape = plaintext, fontsize=12] VEH24;
+			node [label= C3, shape = plaintext, fontsize=12] C324;
+			node [label= C10, shape = plaintext, fontsize=12] C1024;
+			node [label= C30, shape = plaintext, fontsize=12] C3024;
+			VEH24->C324;VEH24->C3024;C324->C3024;C1024->C3024;		}
+		subgraph cluster_25 {
+			label= "000001";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH25;
+			node [label= C3, shape = plaintext, fontsize=12] C325;
+			node [label= C10, shape = plaintext, fontsize=12] C1025;
+			node [label= C30, shape = plaintext, fontsize=12] C3025;
+			VEH25->C325;VEH25->C1025;VEH25->C3025;C325->C1025;C325->C3025;		}
+		subgraph cluster_26 {
+			label= "122210";
+node [label= VEH, shape = plaintext, fontsize=12] VEH26;
+			node [label= C3, shape = plaintext, fontsize=12] C326;
+			node [label= C10, shape = plaintext, fontsize=12] C1026;
+			node [label= C30, shape = plaintext, fontsize=12] C3026;
+			C1026->VEH26;C1026->C326;C1026->C3026;C3026->VEH26;		}
+		subgraph cluster_27 {
+			label= "000101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH27;
+			node [label= C3, shape = plaintext, fontsize=12] C327;
+			node [label= C10, shape = plaintext, fontsize=12] C1027;
+			node [label= C30, shape = plaintext, fontsize=12] C3027;
+			VEH27->C327;VEH27->C1027;VEH27->C3027;C327->C3027;		}
+		subgraph cluster_28 {
+			label= "120200";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH28;
+			node [label= C3, shape = plaintext, fontsize=12] C328;
+			node [label= C10, shape = plaintext, fontsize=12] C1028;
+			node [label= C30, shape = plaintext, fontsize=12] C3028;
+			VEH28->C3028;C328->C3028;C1028->VEH28;C1028->C328;C1028->C3028;		}
+		subgraph cluster_29 {
+			label= "221210";
+node [label= VEH, shape = plaintext, fontsize=12] VEH29;
+			node [label= C3, shape = plaintext, fontsize=12] C329;
+			node [label= C10, shape = plaintext, fontsize=12] C1029;
+			node [label= C30, shape = plaintext, fontsize=12] C3029;
+			C329->VEH29;C1029->VEH29;C1029->C329;C1029->C3029;		}
+		subgraph cluster_30 {
+			label= "211001";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH30;
+			node [label= C3, shape = plaintext, fontsize=12] C330;
+			node [label= C10, shape = plaintext, fontsize=12] C1030;
+			node [label= C30, shape = plaintext, fontsize=12] C3030;
+			C330->VEH30;C330->C1030;C330->C3030;		}
+		subgraph cluster_31 {
+			label= "110001";
+node [label= VEH, shape = plaintext, fontsize=12] VEH31;
+			node [label= C3, shape = plaintext, fontsize=12] C331;
+			node [label= C10, shape = plaintext, fontsize=12] C1031;
+			node [label= C30, shape = plaintext, fontsize=12] C3031;
+			VEH31->C3031;C331->C1031;C331->C3031;		}
+		subgraph cluster_32 {
+			label= "122122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH32;
+			node [label= C3, shape = plaintext, fontsize=12] C332;
+			node [label= C10, shape = plaintext, fontsize=12] C1032;
+			node [label= C30, shape = plaintext, fontsize=12] C3032;
+			C1032->VEH32;C3032->VEH32;C3032->C332;C3032->C1032;		}
+		subgraph cluster_33 {
+			label= "212012";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH33;
+			node [label= C3, shape = plaintext, fontsize=12] C333;
+			node [label= C10, shape = plaintext, fontsize=12] C1033;
+			node [label= C30, shape = plaintext, fontsize=12] C3033;
+			C333->VEH33;C333->C1033;C3033->VEH33;C3033->C1033;		}
+		subgraph cluster_34 {
+			label= "122111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH34;
+			node [label= C3, shape = plaintext, fontsize=12] C334;
+			node [label= C10, shape = plaintext, fontsize=12] C1034;
+			node [label= C30, shape = plaintext, fontsize=12] C3034;
+			C1034->VEH34;C3034->VEH34;		}
+		subgraph cluster_35 {
+			label= "122211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH35;
+			node [label= C3, shape = plaintext, fontsize=12] C335;
+			node [label= C10, shape = plaintext, fontsize=12] C1035;
+			node [label= C30, shape = plaintext, fontsize=12] C3035;
+			C1035->VEH35;C1035->C335;C3035->VEH35;		}
+		subgraph cluster_36 {
+			label= "000011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH36;
+			node [label= C3, shape = plaintext, fontsize=12] C336;
+			node [label= C10, shape = plaintext, fontsize=12] C1036;
+			node [label= C30, shape = plaintext, fontsize=12] C3036;
+			VEH36->C336;VEH36->C1036;VEH36->C3036;C336->C1036;		}
+		subgraph cluster_37 {
+			label= "000012";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH37;
+			node [label= C3, shape = plaintext, fontsize=12] C337;
+			node [label= C10, shape = plaintext, fontsize=12] C1037;
+			node [label= C30, shape = plaintext, fontsize=12] C3037;
+			VEH37->C337;VEH37->C1037;VEH37->C3037;C337->C1037;C3037->C1037;		}
+		subgraph cluster_38 {
+			label= "112112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH38;
+			node [label= C3, shape = plaintext, fontsize=12] C338;
+			node [label= C10, shape = plaintext, fontsize=12] C1038;
+			node [label= C30, shape = plaintext, fontsize=12] C3038;
+			C3038->VEH38;C3038->C1038;		}
+		subgraph cluster_39 {
+			label= "111100";
+node [label= VEH, shape = plaintext, fontsize=12] VEH39;
+			node [label= C3, shape = plaintext, fontsize=12] C339;
+			node [label= C10, shape = plaintext, fontsize=12] C1039;
+			node [label= C30, shape = plaintext, fontsize=12] C3039;
+			C339->C3039;C1039->C3039;		}
+		subgraph cluster_40 {
+			label= "101112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH40;
+			node [label= C3, shape = plaintext, fontsize=12] C340;
+			node [label= C10, shape = plaintext, fontsize=12] C1040;
+			node [label= C30, shape = plaintext, fontsize=12] C3040;
+			VEH40->C1040;C3040->C1040;		}
+		subgraph cluster_41 {
+			label= "101001";
+node [label= VEH, shape = plaintext, fontsize=12] VEH41;
+			node [label= C3, shape = plaintext, fontsize=12] C341;
+			node [label= C10, shape = plaintext, fontsize=12] C1041;
+			node [label= C30, shape = plaintext, fontsize=12] C3041;
+			VEH41->C1041;C341->C1041;C341->C3041;		}
+		subgraph cluster_42 {
+			label= "110200";
+node [label= VEH, shape = plaintext, fontsize=12] VEH42;
+			node [label= C3, shape = plaintext, fontsize=12] C342;
+			node [label= C10, shape = plaintext, fontsize=12] C1042;
+			node [label= C30, shape = plaintext, fontsize=12] C3042;
+			VEH42->C3042;C342->C3042;C1042->C342;C1042->C3042;		}
+		subgraph cluster_43 {
+			label= "112121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH43;
+			node [label= C3, shape = plaintext, fontsize=12] C343;
+			node [label= C10, shape = plaintext, fontsize=12] C1043;
+			node [label= C30, shape = plaintext, fontsize=12] C3043;
+			C3043->VEH43;C3043->C343;		}
+		subgraph cluster_44 {
+			label= "110000";
+node [label= VEH, shape = plaintext, fontsize=12] VEH44;
+			node [label= C3, shape = plaintext, fontsize=12] C344;
+			node [label= C10, shape = plaintext, fontsize=12] C1044;
+			node [label= C30, shape = plaintext, fontsize=12] C3044;
+			VEH44->C3044;C344->C1044;C344->C3044;C1044->C3044;		}
+		subgraph cluster_45 {
+			label= "121220";
+node [label= VEH, shape = plaintext, fontsize=12] VEH45;
+			node [label= C3, shape = plaintext, fontsize=12] C345;
+			node [label= C10, shape = plaintext, fontsize=12] C1045;
+			node [label= C30, shape = plaintext, fontsize=12] C3045;
+			C1045->VEH45;C1045->C345;C1045->C3045;C3045->C345;		}
+		subgraph cluster_46 {
+			label= "222211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH46;
+			node [label= C3, shape = plaintext, fontsize=12] C346;
+			node [label= C10, shape = plaintext, fontsize=12] C1046;
+			node [label= C30, shape = plaintext, fontsize=12] C3046;
+			C346->VEH46;C1046->VEH46;C1046->C346;C3046->VEH46;		}
+		subgraph cluster_47 {
+			label= "101022";
+node [label= VEH, shape = plaintext, fontsize=12] VEH47;
+			node [label= C3, shape = plaintext, fontsize=12] C347;
+			node [label= C10, shape = plaintext, fontsize=12] C1047;
+			node [label= C30, shape = plaintext, fontsize=12] C3047;
+			VEH47->C1047;C347->C1047;C3047->C347;C3047->C1047;		}
+		subgraph cluster_48 {
+			label= "221111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH48;
+			node [label= C3, shape = plaintext, fontsize=12] C348;
+			node [label= C10, shape = plaintext, fontsize=12] C1048;
+			node [label= C30, shape = plaintext, fontsize=12] C3048;
+			C348->VEH48;C1048->VEH48;		}
+		subgraph cluster_49 {
+			label= "120210";
+node [label= VEH, shape = plaintext, fontsize=12] VEH49;
+			node [label= C3, shape = plaintext, fontsize=12] C349;
+			node [label= C10, shape = plaintext, fontsize=12] C1049;
+			node [label= C30, shape = plaintext, fontsize=12] C3049;
+			VEH49->C3049;C1049->VEH49;C1049->C349;C1049->C3049;		}
+		subgraph cluster_50 {
+			label= "122222";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH50;
+			node [label= C3, shape = plaintext, fontsize=12] C350;
+			node [label= C10, shape = plaintext, fontsize=12] C1050;
+			node [label= C30, shape = plaintext, fontsize=12] C3050;
+			C1050->VEH50;C1050->C350;C3050->VEH50;C3050->C350;C3050->C1050;		}
+		subgraph cluster_51 {
+			label= "222210";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH51;
+			node [label= C3, shape = plaintext, fontsize=12] C351;
+			node [label= C10, shape = plaintext, fontsize=12] C1051;
+			node [label= C30, shape = plaintext, fontsize=12] C3051;
+			C351->VEH51;C1051->VEH51;C1051->C351;C1051->C3051;C3051->VEH51;		}
+		subgraph cluster_52 {
+			label= "221110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH52;
+			node [label= C3, shape = plaintext, fontsize=12] C352;
+			node [label= C10, shape = plaintext, fontsize=12] C1052;
+			node [label= C30, shape = plaintext, fontsize=12] C3052;
+			C352->VEH52;C1052->VEH52;C1052->C3052;		}
+		subgraph cluster_53 {
+			label= "222110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH53;
+			node [label= C3, shape = plaintext, fontsize=12] C353;
+			node [label= C10, shape = plaintext, fontsize=12] C1053;
+			node [label= C30, shape = plaintext, fontsize=12] C3053;
+			C353->VEH53;C1053->VEH53;C1053->C3053;C3053->VEH53;		}
+		subgraph cluster_54 {
+			label= "010200";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH54;
+			node [label= C3, shape = plaintext, fontsize=12] C354;
+			node [label= C10, shape = plaintext, fontsize=12] C1054;
+			node [label= C30, shape = plaintext, fontsize=12] C3054;
+			VEH54->C354;VEH54->C3054;C354->C3054;C1054->C354;C1054->C3054;		}
+		subgraph cluster_55 {
+			label= "111210";
+node [label= VEH, shape = plaintext, fontsize=12] VEH55;
+			node [label= C3, shape = plaintext, fontsize=12] C355;
+			node [label= C10, shape = plaintext, fontsize=12] C1055;
+			node [label= C30, shape = plaintext, fontsize=12] C3055;
+			C1055->C355;C1055->C3055;		}
+		subgraph cluster_56 {
+			label= "010111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH56;
+			node [label= C3, shape = plaintext, fontsize=12] C356;
+			node [label= C10, shape = plaintext, fontsize=12] C1056;
+			node [label= C30, shape = plaintext, fontsize=12] C3056;
+			VEH56->C356;VEH56->C3056;		}
+		subgraph cluster_57 {
+			label= "111001";
+node [label= VEH, shape = plaintext, fontsize=12] VEH57;
+			node [label= C3, shape = plaintext, fontsize=12] C357;
+			node [label= C10, shape = plaintext, fontsize=12] C1057;
+			node [label= C30, shape = plaintext, fontsize=12] C3057;
+			C357->C1057;C357->C3057;		}
+		subgraph cluster_58 {
+			label= "120100";
+node [label= VEH, shape = plaintext, fontsize=12] VEH58;
+			node [label= C3, shape = plaintext, fontsize=12] C358;
+			node [label= C10, shape = plaintext, fontsize=12] C1058;
+			node [label= C30, shape = plaintext, fontsize=12] C3058;
+			VEH58->C3058;C358->C3058;C1058->VEH58;C1058->C3058;		}
+		subgraph cluster_59 {
+			label= "222121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH59;
+			node [label= C3, shape = plaintext, fontsize=12] C359;
+			node [label= C10, shape = plaintext, fontsize=12] C1059;
+			node [label= C30, shape = plaintext, fontsize=12] C3059;
+			C359->VEH59;C1059->VEH59;C3059->VEH59;C3059->C359;		}
+		subgraph cluster_60 {
+			label= "100000";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH60;
+			node [label= C3, shape = plaintext, fontsize=12] C360;
+			node [label= C10, shape = plaintext, fontsize=12] C1060;
+			node [label= C30, shape = plaintext, fontsize=12] C3060;
+			VEH60->C1060;VEH60->C3060;C360->C1060;C360->C3060;C1060->C3060;		}
+		subgraph cluster_61 {
+			label= "010210";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH61;
+			node [label= C3, shape = plaintext, fontsize=12] C361;
+			node [label= C10, shape = plaintext, fontsize=12] C1061;
+			node [label= C30, shape = plaintext, fontsize=12] C3061;
+			VEH61->C361;VEH61->C3061;C1061->C361;C1061->C3061;		}
+		subgraph cluster_62 {
+			label= "212111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH62;
+			node [label= C3, shape = plaintext, fontsize=12] C362;
+			node [label= C10, shape = plaintext, fontsize=12] C1062;
+			node [label= C30, shape = plaintext, fontsize=12] C3062;
+			C362->VEH62;C3062->VEH62;		}
+		subgraph cluster_63 {
+			label= "110210";
+node [label= VEH, shape = plaintext, fontsize=12] VEH63;
+			node [label= C3, shape = plaintext, fontsize=12] C363;
+			node [label= C10, shape = plaintext, fontsize=12] C1063;
+			node [label= C30, shape = plaintext, fontsize=12] C3063;
+			VEH63->C3063;C1063->C363;C1063->C3063;		}
+		subgraph cluster_64 {
+			label= "121100";
+node [label= VEH, shape = plaintext, fontsize=12] VEH64;
+			node [label= C3, shape = plaintext, fontsize=12] C364;
+			node [label= C10, shape = plaintext, fontsize=12] C1064;
+			node [label= C30, shape = plaintext, fontsize=12] C3064;
+			C364->C3064;C1064->VEH64;C1064->C3064;		}
+		subgraph cluster_65 {
+			label= "222100";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH65;
+			node [label= C3, shape = plaintext, fontsize=12] C365;
+			node [label= C10, shape = plaintext, fontsize=12] C1065;
+			node [label= C30, shape = plaintext, fontsize=12] C3065;
+			C365->VEH65;C365->C3065;C1065->VEH65;C1065->C3065;C3065->VEH65;		}
+		subgraph cluster_66 {
+			label= "001111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH66;
+			node [label= C3, shape = plaintext, fontsize=12] C366;
+			node [label= C10, shape = plaintext, fontsize=12] C1066;
+			node [label= C30, shape = plaintext, fontsize=12] C3066;
+			VEH66->C366;VEH66->C1066;		}
+		subgraph cluster_67 {
+			label= "101122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH67;
+			node [label= C3, shape = plaintext, fontsize=12] C367;
+			node [label= C10, shape = plaintext, fontsize=12] C1067;
+			node [label= C30, shape = plaintext, fontsize=12] C3067;
+			VEH67->C1067;C3067->C367;C3067->C1067;		}
+		subgraph cluster_68 {
+			label= "211101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH68;
+			node [label= C3, shape = plaintext, fontsize=12] C368;
+			node [label= C10, shape = plaintext, fontsize=12] C1068;
+			node [label= C30, shape = plaintext, fontsize=12] C3068;
+			C368->VEH68;C368->C3068;		}
+		subgraph cluster_69 {
+			label= "001012";
+node [label= VEH, shape = plaintext, fontsize=12] VEH69;
+			node [label= C3, shape = plaintext, fontsize=12] C369;
+			node [label= C10, shape = plaintext, fontsize=12] C1069;
+			node [label= C30, shape = plaintext, fontsize=12] C3069;
+			VEH69->C369;VEH69->C1069;C369->C1069;C3069->C1069;		}
+		subgraph cluster_70 {
+			label= "111012";
+node [label= VEH, shape = plaintext, fontsize=12] VEH70;
+			node [label= C3, shape = plaintext, fontsize=12] C370;
+			node [label= C10, shape = plaintext, fontsize=12] C1070;
+			node [label= C30, shape = plaintext, fontsize=12] C3070;
+			C370->C1070;C3070->C1070;		}
+		subgraph cluster_71 {
+			label= "122220";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH71;
+			node [label= C3, shape = plaintext, fontsize=12] C371;
+			node [label= C10, shape = plaintext, fontsize=12] C1071;
+			node [label= C30, shape = plaintext, fontsize=12] C3071;
+			C1071->VEH71;C1071->C371;C1071->C3071;C3071->VEH71;C3071->C371;		}
+		subgraph cluster_72 {
+			label= "112012";
+node [label= VEH, shape = plaintext, fontsize=12] VEH72;
+			node [label= C3, shape = plaintext, fontsize=12] C372;
+			node [label= C10, shape = plaintext, fontsize=12] C1072;
+			node [label= C30, shape = plaintext, fontsize=12] C3072;
+			C372->C1072;C3072->VEH72;C3072->C1072;		}
+		subgraph cluster_73 {
+			label= "222222";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH73;
+			node [label= C3, shape = plaintext, fontsize=12] C373;
+			node [label= C10, shape = plaintext, fontsize=12] C1073;
+			node [label= C30, shape = plaintext, fontsize=12] C3073;
+			C373->VEH73;C1073->VEH73;C1073->C373;C3073->VEH73;C3073->C373;C3073->C1073;		}
+		subgraph cluster_74 {
+			label= "102012";
+node [label= VEH, shape = plaintext, fontsize=12] VEH74;
+			node [label= C3, shape = plaintext, fontsize=12] C374;
+			node [label= C10, shape = plaintext, fontsize=12] C1074;
+			node [label= C30, shape = plaintext, fontsize=12] C3074;
+			VEH74->C1074;C374->C1074;C3074->VEH74;C3074->C1074;		}
+		subgraph cluster_75 {
+			label= "221200";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH75;
+			node [label= C3, shape = plaintext, fontsize=12] C375;
+			node [label= C10, shape = plaintext, fontsize=12] C1075;
+			node [label= C30, shape = plaintext, fontsize=12] C3075;
+			C375->VEH75;C375->C3075;C1075->VEH75;C1075->C375;C1075->C3075;		}
+		subgraph cluster_76 {
+			label= "122121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH76;
+			node [label= C3, shape = plaintext, fontsize=12] C376;
+			node [label= C10, shape = plaintext, fontsize=12] C1076;
+			node [label= C30, shape = plaintext, fontsize=12] C3076;
+			C1076->VEH76;C3076->VEH76;C3076->C376;		}
+		subgraph cluster_77 {
+			label= "111122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH77;
+			node [label= C3, shape = plaintext, fontsize=12] C377;
+			node [label= C10, shape = plaintext, fontsize=12] C1077;
+			node [label= C30, shape = plaintext, fontsize=12] C3077;
+			C3077->C377;C3077->C1077;		}
+		subgraph cluster_78 {
+			label= "001122";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH78;
+			node [label= C3, shape = plaintext, fontsize=12] C378;
+			node [label= C10, shape = plaintext, fontsize=12] C1078;
+			node [label= C30, shape = plaintext, fontsize=12] C3078;
+			VEH78->C378;VEH78->C1078;C3078->C378;C3078->C1078;		}
+		subgraph cluster_79 {
+			label= "122110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH79;
+			node [label= C3, shape = plaintext, fontsize=12] C379;
+			node [label= C10, shape = plaintext, fontsize=12] C1079;
+			node [label= C30, shape = plaintext, fontsize=12] C3079;
+			C1079->VEH79;C1079->C3079;C3079->VEH79;		}
+		subgraph cluster_80 {
+			label= "222221";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH80;
+			node [label= C3, shape = plaintext, fontsize=12] C380;
+			node [label= C10, shape = plaintext, fontsize=12] C1080;
+			node [label= C30, shape = plaintext, fontsize=12] C3080;
+			C380->VEH80;C1080->VEH80;C1080->C380;C3080->VEH80;C3080->C380;		}
+		subgraph cluster_81 {
+			label= "221211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH81;
+			node [label= C3, shape = plaintext, fontsize=12] C381;
+			node [label= C10, shape = plaintext, fontsize=12] C1081;
+			node [label= C30, shape = plaintext, fontsize=12] C3081;
+			C381->VEH81;C1081->VEH81;C1081->C381;		}
+		subgraph cluster_82 {
+			label= "110111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH82;
+			node [label= C3, shape = plaintext, fontsize=12] C382;
+			node [label= C10, shape = plaintext, fontsize=12] C1082;
+			node [label= C30, shape = plaintext, fontsize=12] C3082;
+			VEH82->C3082;		}
+		subgraph cluster_83 {
+			label= "121221";
+node [label= VEH, shape = plaintext, fontsize=12] VEH83;
+			node [label= C3, shape = plaintext, fontsize=12] C383;
+			node [label= C10, shape = plaintext, fontsize=12] C1083;
+			node [label= C30, shape = plaintext, fontsize=12] C3083;
+			C1083->VEH83;C1083->C383;C3083->C383;		}
+		subgraph cluster_84 {
+			label= "101111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH84;
+			node [label= C3, shape = plaintext, fontsize=12] C384;
+			node [label= C10, shape = plaintext, fontsize=12] C1084;
+			node [label= C30, shape = plaintext, fontsize=12] C3084;
+			VEH84->C1084;		}
+		subgraph cluster_85 {
+			label= "111221";
+node [label= VEH, shape = plaintext, fontsize=12] VEH85;
+			node [label= C3, shape = plaintext, fontsize=12] C385;
+			node [label= C10, shape = plaintext, fontsize=12] C1085;
+			node [label= C30, shape = plaintext, fontsize=12] C3085;
+			C1085->C385;C3085->C385;		}
+		subgraph cluster_86 {
+			label= "000110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH86;
+			node [label= C3, shape = plaintext, fontsize=12] C386;
+			node [label= C10, shape = plaintext, fontsize=12] C1086;
+			node [label= C30, shape = plaintext, fontsize=12] C3086;
+			VEH86->C386;VEH86->C1086;VEH86->C3086;C1086->C3086;		}
+		subgraph cluster_87 {
+			label= "221101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH87;
+			node [label= C3, shape = plaintext, fontsize=12] C387;
+			node [label= C10, shape = plaintext, fontsize=12] C1087;
+			node [label= C30, shape = plaintext, fontsize=12] C3087;
+			C387->VEH87;C387->C3087;C1087->VEH87;		}
+		subgraph cluster_88 {
+			label= "001112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH88;
+			node [label= C3, shape = plaintext, fontsize=12] C388;
+			node [label= C10, shape = plaintext, fontsize=12] C1088;
+			node [label= C30, shape = plaintext, fontsize=12] C3088;
+			VEH88->C388;VEH88->C1088;C3088->C1088;		}
+		subgraph cluster_89 {
+			label= "212122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH89;
+			node [label= C3, shape = plaintext, fontsize=12] C389;
+			node [label= C10, shape = plaintext, fontsize=12] C1089;
+			node [label= C30, shape = plaintext, fontsize=12] C3089;
+			C389->VEH89;C3089->VEH89;C3089->C389;C3089->C1089;		}
+		subgraph cluster_90 {
+			label= "222122";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH90;
+			node [label= C3, shape = plaintext, fontsize=12] C390;
+			node [label= C10, shape = plaintext, fontsize=12] C1090;
+			node [label= C30, shape = plaintext, fontsize=12] C3090;
+			C390->VEH90;C1090->VEH90;C3090->VEH90;C3090->C390;C3090->C1090;		}
+		subgraph cluster_91 {
+			label= "212011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH91;
+			node [label= C3, shape = plaintext, fontsize=12] C391;
+			node [label= C10, shape = plaintext, fontsize=12] C1091;
+			node [label= C30, shape = plaintext, fontsize=12] C3091;
+			C391->VEH91;C391->C1091;C3091->VEH91;		}
+		subgraph cluster_92 {
+			label= "102022";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH92;
+			node [label= C3, shape = plaintext, fontsize=12] C392;
+			node [label= C10, shape = plaintext, fontsize=12] C1092;
+			node [label= C30, shape = plaintext, fontsize=12] C3092;
+			VEH92->C1092;C392->C1092;C3092->VEH92;C3092->C392;C3092->C1092;		}
+		subgraph cluster_93 {
+			label= "111022";
+node [label= VEH, shape = plaintext, fontsize=12] VEH93;
+			node [label= C3, shape = plaintext, fontsize=12] C393;
+			node [label= C10, shape = plaintext, fontsize=12] C1093;
+			node [label= C30, shape = plaintext, fontsize=12] C3093;
+			C393->C1093;C3093->C393;C3093->C1093;		}
+		subgraph cluster_94 {
+			label= "222101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH94;
+			node [label= C3, shape = plaintext, fontsize=12] C394;
+			node [label= C10, shape = plaintext, fontsize=12] C1094;
+			node [label= C30, shape = plaintext, fontsize=12] C3094;
+			C394->VEH94;C394->C3094;C1094->VEH94;C3094->VEH94;		}
+		subgraph cluster_95 {
+			label= "010101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH95;
+			node [label= C3, shape = plaintext, fontsize=12] C395;
+			node [label= C10, shape = plaintext, fontsize=12] C1095;
+			node [label= C30, shape = plaintext, fontsize=12] C3095;
+			VEH95->C395;VEH95->C3095;C395->C3095;		}
+		subgraph cluster_96 {
+			label= "000112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH96;
+			node [label= C3, shape = plaintext, fontsize=12] C396;
+			node [label= C10, shape = plaintext, fontsize=12] C1096;
+			node [label= C30, shape = plaintext, fontsize=12] C3096;
+			VEH96->C396;VEH96->C1096;VEH96->C3096;C3096->C1096;		}
+		subgraph cluster_97 {
+			label= "212112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH97;
+			node [label= C3, shape = plaintext, fontsize=12] C397;
+			node [label= C10, shape = plaintext, fontsize=12] C1097;
+			node [label= C30, shape = plaintext, fontsize=12] C3097;
+			C397->VEH97;C3097->VEH97;C3097->C1097;		}
+		subgraph cluster_98 {
+			label= "010110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH98;
+			node [label= C3, shape = plaintext, fontsize=12] C398;
+			node [label= C10, shape = plaintext, fontsize=12] C1098;
+			node [label= C30, shape = plaintext, fontsize=12] C3098;
+			VEH98->C398;VEH98->C3098;C1098->C3098;		}
+		subgraph cluster_99 {
+			label= "201002";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH99;
+			node [label= C3, shape = plaintext, fontsize=12] C399;
+			node [label= C10, shape = plaintext, fontsize=12] C1099;
+			node [label= C30, shape = plaintext, fontsize=12] C3099;
+			VEH99->C1099;C399->VEH99;C399->C1099;C399->C3099;C3099->C1099;		}
+		subgraph cluster_100 {
+			label= "201001";
+node [label= VEH, shape = plaintext, fontsize=12] VEH100;
+			node [label= C3, shape = plaintext, fontsize=12] C3100;
+			node [label= C10, shape = plaintext, fontsize=12] C10100;
+			node [label= C30, shape = plaintext, fontsize=12] C30100;
+			VEH100->C10100;C3100->VEH100;C3100->C10100;C3100->C30100;		}
+		subgraph cluster_101 {
+			label= "222112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH101;
+			node [label= C3, shape = plaintext, fontsize=12] C3101;
+			node [label= C10, shape = plaintext, fontsize=12] C10101;
+			node [label= C30, shape = plaintext, fontsize=12] C30101;
+			C3101->VEH101;C10101->VEH101;C30101->VEH101;C30101->C10101;		}
+		subgraph cluster_102 {
+			label= "100110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH102;
+			node [label= C3, shape = plaintext, fontsize=12] C3102;
+			node [label= C10, shape = plaintext, fontsize=12] C10102;
+			node [label= C30, shape = plaintext, fontsize=12] C30102;
+			VEH102->C10102;VEH102->C30102;C10102->C30102;		}
+		subgraph cluster_103 {
+			label= "222001";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH103;
+			node [label= C3, shape = plaintext, fontsize=12] C3103;
+			node [label= C10, shape = plaintext, fontsize=12] C10103;
+			node [label= C30, shape = plaintext, fontsize=12] C30103;
+			C3103->VEH103;C3103->C10103;C3103->C30103;C10103->VEH103;C30103->VEH103;		}
+		subgraph cluster_104 {
+			label= "200001";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH104;
+			node [label= C3, shape = plaintext, fontsize=12] C3104;
+			node [label= C10, shape = plaintext, fontsize=12] C10104;
+			node [label= C30, shape = plaintext, fontsize=12] C30104;
+			VEH104->C10104;VEH104->C30104;C3104->VEH104;C3104->C10104;C3104->C30104;		}
+		subgraph cluster_105 {
+			label= "000000";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH105;
+			node [label= C3, shape = plaintext, fontsize=12] C3105;
+			node [label= C10, shape = plaintext, fontsize=12] C10105;
+			node [label= C30, shape = plaintext, fontsize=12] C30105;
+			VEH105->C3105;VEH105->C10105;VEH105->C30105;C3105->C10105;C3105->C30105;C10105->C30105;		}
+		subgraph cluster_106 {
+			label= "102122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH106;
+			node [label= C3, shape = plaintext, fontsize=12] C3106;
+			node [label= C10, shape = plaintext, fontsize=12] C10106;
+			node [label= C30, shape = plaintext, fontsize=12] C30106;
+			VEH106->C10106;C30106->VEH106;C30106->C3106;C30106->C10106;		}
+		subgraph cluster_107 {
+			label= "121111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH107;
+			node [label= C3, shape = plaintext, fontsize=12] C3107;
+			node [label= C10, shape = plaintext, fontsize=12] C10107;
+			node [label= C30, shape = plaintext, fontsize=12] C30107;
+			C10107->VEH107;		}
+		subgraph cluster_108 {
+			label= "211011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH108;
+			node [label= C3, shape = plaintext, fontsize=12] C3108;
+			node [label= C10, shape = plaintext, fontsize=12] C10108;
+			node [label= C30, shape = plaintext, fontsize=12] C30108;
+			C3108->VEH108;C3108->C10108;		}
+		subgraph cluster_109 {
+			label= "001022";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH109;
+			node [label= C3, shape = plaintext, fontsize=12] C3109;
+			node [label= C10, shape = plaintext, fontsize=12] C10109;
+			node [label= C30, shape = plaintext, fontsize=12] C30109;
+			VEH109->C3109;VEH109->C10109;C3109->C10109;C30109->C3109;C30109->C10109;		}
+		subgraph cluster_110 {
+			label= "111002";
+node [label= VEH, shape = plaintext, fontsize=12] VEH110;
+			node [label= C3, shape = plaintext, fontsize=12] C3110;
+			node [label= C10, shape = plaintext, fontsize=12] C10110;
+			node [label= C30, shape = plaintext, fontsize=12] C30110;
+			C3110->C10110;C3110->C30110;C30110->C10110;		}
+		subgraph cluster_111 {
+			label= "201012";
+node [label= VEH, shape = plaintext, fontsize=12] VEH111;
+			node [label= C3, shape = plaintext, fontsize=12] C3111;
+			node [label= C10, shape = plaintext, fontsize=12] C10111;
+			node [label= C30, shape = plaintext, fontsize=12] C30111;
+			VEH111->C10111;C3111->VEH111;C3111->C10111;C30111->C10111;		}
+		subgraph cluster_112 {
+			label= "000002";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH112;
+			node [label= C3, shape = plaintext, fontsize=12] C3112;
+			node [label= C10, shape = plaintext, fontsize=12] C10112;
+			node [label= C30, shape = plaintext, fontsize=12] C30112;
+			VEH112->C3112;VEH112->C10112;VEH112->C30112;C3112->C10112;C3112->C30112;C30112->C10112;		}
+		subgraph cluster_113 {
+			label= "012122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH113;
+			node [label= C3, shape = plaintext, fontsize=12] C3113;
+			node [label= C10, shape = plaintext, fontsize=12] C10113;
+			node [label= C30, shape = plaintext, fontsize=12] C30113;
+			VEH113->C3113;C30113->VEH113;C30113->C3113;C30113->C10113;		}
+		subgraph cluster_114 {
+			label= "112022";
+node [label= VEH, shape = plaintext, fontsize=12] VEH114;
+			node [label= C3, shape = plaintext, fontsize=12] C3114;
+			node [label= C10, shape = plaintext, fontsize=12] C10114;
+			node [label= C30, shape = plaintext, fontsize=12] C30114;
+			C3114->C10114;C30114->VEH114;C30114->C3114;C30114->C10114;		}
+		subgraph cluster_115 {
+			label= "111200";
+node [label= VEH, shape = plaintext, fontsize=12] VEH115;
+			node [label= C3, shape = plaintext, fontsize=12] C3115;
+			node [label= C10, shape = plaintext, fontsize=12] C10115;
+			node [label= C30, shape = plaintext, fontsize=12] C30115;
+			C3115->C30115;C10115->C3115;C10115->C30115;		}
+		subgraph cluster_116 {
+			label= "011221";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH116;
+			node [label= C3, shape = plaintext, fontsize=12] C3116;
+			node [label= C10, shape = plaintext, fontsize=12] C10116;
+			node [label= C30, shape = plaintext, fontsize=12] C30116;
+			VEH116->C3116;C10116->C3116;C30116->C3116;		}
+		subgraph cluster_117 {
+			label= "222011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH117;
+			node [label= C3, shape = plaintext, fontsize=12] C3117;
+			node [label= C10, shape = plaintext, fontsize=12] C10117;
+			node [label= C30, shape = plaintext, fontsize=12] C30117;
+			C3117->VEH117;C3117->C10117;C10117->VEH117;C30117->VEH117;		}
+		subgraph cluster_118 {
+			label= "100112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH118;
+			node [label= C3, shape = plaintext, fontsize=12] C3118;
+			node [label= C10, shape = plaintext, fontsize=12] C10118;
+			node [label= C30, shape = plaintext, fontsize=12] C30118;
+			VEH118->C10118;VEH118->C30118;C30118->C10118;		}
+		subgraph cluster_119 {
+			label= "211100";
+node [label= VEH, shape = plaintext, fontsize=12] VEH119;
+			node [label= C3, shape = plaintext, fontsize=12] C3119;
+			node [label= C10, shape = plaintext, fontsize=12] C10119;
+			node [label= C30, shape = plaintext, fontsize=12] C30119;
+			C3119->VEH119;C3119->C30119;C10119->C30119;		}
+		subgraph cluster_120 {
+			label= "112111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH120;
+			node [label= C3, shape = plaintext, fontsize=12] C3120;
+			node [label= C10, shape = plaintext, fontsize=12] C10120;
+			node [label= C30, shape = plaintext, fontsize=12] C30120;
+			C30120->VEH120;		}
+		subgraph cluster_121 {
+			label= "102112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH121;
+			node [label= C3, shape = plaintext, fontsize=12] C3121;
+			node [label= C10, shape = plaintext, fontsize=12] C10121;
+			node [label= C30, shape = plaintext, fontsize=12] C30121;
+			VEH121->C10121;C30121->VEH121;C30121->C10121;		}
+		subgraph cluster_122 {
+			label= "221001";
+node [label= VEH, shape = plaintext, fontsize=12] VEH122;
+			node [label= C3, shape = plaintext, fontsize=12] C3122;
+			node [label= C10, shape = plaintext, fontsize=12] C10122;
+			node [label= C30, shape = plaintext, fontsize=12] C30122;
+			C3122->VEH122;C3122->C10122;C3122->C30122;C10122->VEH122;		}
+		subgraph cluster_123 {
+			label= "111220";
+node [label= VEH, shape = plaintext, fontsize=12] VEH123;
+			node [label= C3, shape = plaintext, fontsize=12] C3123;
+			node [label= C10, shape = plaintext, fontsize=12] C10123;
+			node [label= C30, shape = plaintext, fontsize=12] C30123;
+			C10123->C3123;C10123->C30123;C30123->C3123;		}
+		subgraph cluster_124 {
+			label= "020210";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH124;
+			node [label= C3, shape = plaintext, fontsize=12] C3124;
+			node [label= C10, shape = plaintext, fontsize=12] C10124;
+			node [label= C30, shape = plaintext, fontsize=12] C30124;
+			VEH124->C3124;VEH124->C30124;C10124->VEH124;C10124->C3124;C10124->C30124;		}
+		subgraph cluster_125 {
+			label= "211000";
+node [label= VEH, shape = plaintext, fontsize=12] VEH125;
+			node [label= C3, shape = plaintext, fontsize=12] C3125;
+			node [label= C10, shape = plaintext, fontsize=12] C10125;
+			node [label= C30, shape = plaintext, fontsize=12] C30125;
+			C3125->VEH125;C3125->C10125;C3125->C30125;C10125->C30125;		}
+		subgraph cluster_126 {
+			label= "112221";
+node [label= VEH, shape = plaintext, fontsize=12] VEH126;
+			node [label= C3, shape = plaintext, fontsize=12] C3126;
+			node [label= C10, shape = plaintext, fontsize=12] C10126;
+			node [label= C30, shape = plaintext, fontsize=12] C30126;
+			C10126->C3126;C30126->VEH126;C30126->C3126;		}
+		subgraph cluster_127 {
+			label= "011210";
+node [label= VEH, shape = plaintext, fontsize=12] VEH127;
+			node [label= C3, shape = plaintext, fontsize=12] C3127;
+			node [label= C10, shape = plaintext, fontsize=12] C10127;
+			node [label= C30, shape = plaintext, fontsize=12] C30127;
+			VEH127->C3127;C10127->C3127;C10127->C30127;		}
+		subgraph cluster_128 {
+			label= "011121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH128;
+			node [label= C3, shape = plaintext, fontsize=12] C3128;
+			node [label= C10, shape = plaintext, fontsize=12] C10128;
+			node [label= C30, shape = plaintext, fontsize=12] C30128;
+			VEH128->C3128;C30128->C3128;		}
+		subgraph cluster_129 {
+			label= "212022";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH129;
+			node [label= C3, shape = plaintext, fontsize=12] C3129;
+			node [label= C10, shape = plaintext, fontsize=12] C10129;
+			node [label= C30, shape = plaintext, fontsize=12] C30129;
+			C3129->VEH129;C3129->C10129;C30129->VEH129;C30129->C3129;C30129->C10129;		}
+		subgraph cluster_130 {
+			label= "021220";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH130;
+			node [label= C3, shape = plaintext, fontsize=12] C3130;
+			node [label= C10, shape = plaintext, fontsize=12] C10130;
+			node [label= C30, shape = plaintext, fontsize=12] C30130;
+			VEH130->C3130;C10130->VEH130;C10130->C3130;C10130->C30130;C30130->C3130;		}
+		subgraph cluster_131 {
+			label= "200000";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH131;
+			node [label= C3, shape = plaintext, fontsize=12] C3131;
+			node [label= C10, shape = plaintext, fontsize=12] C10131;
+			node [label= C30, shape = plaintext, fontsize=12] C30131;
+			VEH131->C10131;VEH131->C30131;C3131->VEH131;C3131->C10131;C3131->C30131;C10131->C30131;		}
+		subgraph cluster_132 {
+			label= "200002";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH132;
+			node [label= C3, shape = plaintext, fontsize=12] C3132;
+			node [label= C10, shape = plaintext, fontsize=12] C10132;
+			node [label= C30, shape = plaintext, fontsize=12] C30132;
+			VEH132->C10132;VEH132->C30132;C3132->VEH132;C3132->C10132;C3132->C30132;C30132->C10132;		}
+		subgraph cluster_133 {
+			label= "001011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH133;
+			node [label= C3, shape = plaintext, fontsize=12] C3133;
+			node [label= C10, shape = plaintext, fontsize=12] C10133;
+			node [label= C30, shape = plaintext, fontsize=12] C30133;
+			VEH133->C3133;VEH133->C10133;C3133->C10133;		}
+		subgraph cluster_134 {
+			label= "000022";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH134;
+			node [label= C3, shape = plaintext, fontsize=12] C3134;
+			node [label= C10, shape = plaintext, fontsize=12] C10134;
+			node [label= C30, shape = plaintext, fontsize=12] C30134;
+			VEH134->C3134;VEH134->C10134;VEH134->C30134;C3134->C10134;C30134->C3134;C30134->C10134;		}
+		subgraph cluster_135 {
+			label= "000220";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH135;
+			node [label= C3, shape = plaintext, fontsize=12] C3135;
+			node [label= C10, shape = plaintext, fontsize=12] C10135;
+			node [label= C30, shape = plaintext, fontsize=12] C30135;
+			VEH135->C3135;VEH135->C10135;VEH135->C30135;C10135->C3135;C10135->C30135;C30135->C3135;		}
+		subgraph cluster_136 {
+			label= "111222";
+node [label= VEH, shape = plaintext, fontsize=12] VEH136;
+			node [label= C3, shape = plaintext, fontsize=12] C3136;
+			node [label= C10, shape = plaintext, fontsize=12] C10136;
+			node [label= C30, shape = plaintext, fontsize=12] C30136;
+			C10136->C3136;C30136->C3136;C30136->C10136;		}
+		subgraph cluster_137 {
+			label= "221011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH137;
+			node [label= C3, shape = plaintext, fontsize=12] C3137;
+			node [label= C10, shape = plaintext, fontsize=12] C10137;
+			node [label= C30, shape = plaintext, fontsize=12] C30137;
+			C3137->VEH137;C3137->C10137;C10137->VEH137;		}
+		subgraph cluster_138 {
+			label= "021211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH138;
+			node [label= C3, shape = plaintext, fontsize=12] C3138;
+			node [label= C10, shape = plaintext, fontsize=12] C10138;
+			node [label= C30, shape = plaintext, fontsize=12] C30138;
+			VEH138->C3138;C10138->VEH138;C10138->C3138;		}
+		subgraph cluster_139 {
+			label= "001121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH139;
+			node [label= C3, shape = plaintext, fontsize=12] C3139;
+			node [label= C10, shape = plaintext, fontsize=12] C10139;
+			node [label= C30, shape = plaintext, fontsize=12] C30139;
+			VEH139->C3139;VEH139->C10139;C30139->C3139;		}
+		subgraph cluster_140 {
+			label= "211002";
+node [label= VEH, shape = plaintext, fontsize=12] VEH140;
+			node [label= C3, shape = plaintext, fontsize=12] C3140;
+			node [label= C10, shape = plaintext, fontsize=12] C10140;
+			node [label= C30, shape = plaintext, fontsize=12] C30140;
+			C3140->VEH140;C3140->C10140;C3140->C30140;C30140->C10140;		}
+		subgraph cluster_141 {
+			label= "000200";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH141;
+			node [label= C3, shape = plaintext, fontsize=12] C3141;
+			node [label= C10, shape = plaintext, fontsize=12] C10141;
+			node [label= C30, shape = plaintext, fontsize=12] C30141;
+			VEH141->C3141;VEH141->C10141;VEH141->C30141;C3141->C30141;C10141->C3141;C10141->C30141;		}
+		subgraph cluster_142 {
+			label= "222220";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH142;
+			node [label= C3, shape = plaintext, fontsize=12] C3142;
+			node [label= C10, shape = plaintext, fontsize=12] C10142;
+			node [label= C30, shape = plaintext, fontsize=12] C30142;
+			C3142->VEH142;C10142->VEH142;C10142->C3142;C10142->C30142;C30142->VEH142;C30142->C3142;		}
+		subgraph cluster_143 {
+			label= "111011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH143;
+			node [label= C3, shape = plaintext, fontsize=12] C3143;
+			node [label= C10, shape = plaintext, fontsize=12] C10143;
+			node [label= C30, shape = plaintext, fontsize=12] C30143;
+			C3143->C10143;		}
+		subgraph cluster_144 {
+			label= "010211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH144;
+			node [label= C3, shape = plaintext, fontsize=12] C3144;
+			node [label= C10, shape = plaintext, fontsize=12] C10144;
+			node [label= C30, shape = plaintext, fontsize=12] C30144;
+			VEH144->C3144;VEH144->C30144;C10144->C3144;		}
+		subgraph cluster_145 {
+			label= "000211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH145;
+			node [label= C3, shape = plaintext, fontsize=12] C3145;
+			node [label= C10, shape = plaintext, fontsize=12] C10145;
+			node [label= C30, shape = plaintext, fontsize=12] C30145;
+			VEH145->C3145;VEH145->C10145;VEH145->C30145;C10145->C3145;		}
+		subgraph cluster_146 {
+			label= "011111";
+node [label= VEH, shape = plaintext, fontsize=12] VEH146;
+			node [label= C3, shape = plaintext, fontsize=12] C3146;
+			node [label= C10, shape = plaintext, fontsize=12] C10146;
+			node [label= C30, shape = plaintext, fontsize=12] C30146;
+			VEH146->C3146;		}
+		subgraph cluster_147 {
+			label= "010121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH147;
+			node [label= C3, shape = plaintext, fontsize=12] C3147;
+			node [label= C10, shape = plaintext, fontsize=12] C10147;
+			node [label= C30, shape = plaintext, fontsize=12] C30147;
+			VEH147->C3147;VEH147->C30147;C30147->C3147;		}
+		subgraph cluster_148 {
+			label= "011211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH148;
+			node [label= C3, shape = plaintext, fontsize=12] C3148;
+			node [label= C10, shape = plaintext, fontsize=12] C10148;
+			node [label= C30, shape = plaintext, fontsize=12] C30148;
+			VEH148->C3148;C10148->C3148;		}
+		subgraph cluster_149 {
+			label= "011220";
+node [label= VEH, shape = plaintext, fontsize=12] VEH149;
+			node [label= C3, shape = plaintext, fontsize=12] C3149;
+			node [label= C10, shape = plaintext, fontsize=12] C10149;
+			node [label= C30, shape = plaintext, fontsize=12] C30149;
+			VEH149->C3149;C10149->C3149;C10149->C30149;C30149->C3149;		}
+		subgraph cluster_150 {
+			label= "111211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH150;
+			node [label= C3, shape = plaintext, fontsize=12] C3150;
+			node [label= C10, shape = plaintext, fontsize=12] C10150;
+			node [label= C30, shape = plaintext, fontsize=12] C30150;
+			C10150->C3150;		}
+		subgraph cluster_151 {
+			label= "202012";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH151;
+			node [label= C3, shape = plaintext, fontsize=12] C3151;
+			node [label= C10, shape = plaintext, fontsize=12] C10151;
+			node [label= C30, shape = plaintext, fontsize=12] C30151;
+			VEH151->C10151;C3151->VEH151;C3151->C10151;C30151->VEH151;C30151->C10151;		}
+		subgraph cluster_152 {
+			label= "222000";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH152;
+			node [label= C3, shape = plaintext, fontsize=12] C3152;
+			node [label= C10, shape = plaintext, fontsize=12] C10152;
+			node [label= C30, shape = plaintext, fontsize=12] C30152;
+			C3152->VEH152;C3152->C10152;C3152->C30152;C10152->VEH152;C10152->C30152;C30152->VEH152;		}
+		subgraph cluster_153 {
+			label= "012121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH153;
+			node [label= C3, shape = plaintext, fontsize=12] C3153;
+			node [label= C10, shape = plaintext, fontsize=12] C10153;
+			node [label= C30, shape = plaintext, fontsize=12] C30153;
+			VEH153->C3153;C30153->VEH153;C30153->C3153;		}
+		subgraph cluster_154 {
+			label= "212121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH154;
+			node [label= C3, shape = plaintext, fontsize=12] C3154;
+			node [label= C10, shape = plaintext, fontsize=12] C10154;
+			node [label= C30, shape = plaintext, fontsize=12] C30154;
+			C3154->VEH154;C30154->VEH154;C30154->C3154;		}
+		subgraph cluster_155 {
+			label= "112222";
+node [label= VEH, shape = plaintext, fontsize=12] VEH155;
+			node [label= C3, shape = plaintext, fontsize=12] C3155;
+			node [label= C10, shape = plaintext, fontsize=12] C10155;
+			node [label= C30, shape = plaintext, fontsize=12] C30155;
+			C10155->C3155;C30155->VEH155;C30155->C3155;C30155->C10155;		}
+		subgraph cluster_156 {
+			label= "222012";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH156;
+			node [label= C3, shape = plaintext, fontsize=12] C3156;
+			node [label= C10, shape = plaintext, fontsize=12] C10156;
+			node [label= C30, shape = plaintext, fontsize=12] C30156;
+			C3156->VEH156;C3156->C10156;C10156->VEH156;C30156->VEH156;C30156->C10156;		}
+		subgraph cluster_157 {
+			label= "220100";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH157;
+			node [label= C3, shape = plaintext, fontsize=12] C3157;
+			node [label= C10, shape = plaintext, fontsize=12] C10157;
+			node [label= C30, shape = plaintext, fontsize=12] C30157;
+			VEH157->C30157;C3157->VEH157;C3157->C30157;C10157->VEH157;C10157->C30157;		}
+		subgraph cluster_158 {
+			label= "111101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH158;
+			node [label= C3, shape = plaintext, fontsize=12] C3158;
+			node [label= C10, shape = plaintext, fontsize=12] C10158;
+			node [label= C30, shape = plaintext, fontsize=12] C30158;
+			C3158->C30158;		}
+		subgraph cluster_159 {
+			label= "011122";
+node [label= VEH, shape = plaintext, fontsize=12] VEH159;
+			node [label= C3, shape = plaintext, fontsize=12] C3159;
+			node [label= C10, shape = plaintext, fontsize=12] C10159;
+			node [label= C30, shape = plaintext, fontsize=12] C30159;
+			VEH159->C3159;C30159->C3159;C30159->C10159;		}
+		subgraph cluster_160 {
+			label= "110011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH160;
+			node [label= C3, shape = plaintext, fontsize=12] C3160;
+			node [label= C10, shape = plaintext, fontsize=12] C10160;
+			node [label= C30, shape = plaintext, fontsize=12] C30160;
+			VEH160->C30160;C3160->C10160;		}
+		subgraph cluster_161 {
+			label= "211112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH161;
+			node [label= C3, shape = plaintext, fontsize=12] C3161;
+			node [label= C10, shape = plaintext, fontsize=12] C10161;
+			node [label= C30, shape = plaintext, fontsize=12] C30161;
+			C3161->VEH161;C30161->C10161;		}
+		subgraph cluster_162 {
+			label= "210000";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH162;
+			node [label= C3, shape = plaintext, fontsize=12] C3162;
+			node [label= C10, shape = plaintext, fontsize=12] C10162;
+			node [label= C30, shape = plaintext, fontsize=12] C30162;
+			VEH162->C30162;C3162->VEH162;C3162->C10162;C3162->C30162;C10162->C30162;		}
+		subgraph cluster_163 {
+			label= "021221";
+node [label= VEH, shape = plaintext, fontsize=12] VEH163;
+			node [label= C3, shape = plaintext, fontsize=12] C3163;
+			node [label= C10, shape = plaintext, fontsize=12] C10163;
+			node [label= C30, shape = plaintext, fontsize=12] C30163;
+			VEH163->C3163;C10163->VEH163;C10163->C3163;C30163->C3163;		}
+		subgraph cluster_164 {
+			label= "111110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH164;
+			node [label= C3, shape = plaintext, fontsize=12] C3164;
+			node [label= C10, shape = plaintext, fontsize=12] C10164;
+			node [label= C30, shape = plaintext, fontsize=12] C30164;
+			C10164->C30164;		}
+}}

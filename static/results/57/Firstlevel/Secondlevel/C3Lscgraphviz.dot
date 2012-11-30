@@ -1,0 +1,44 @@
+strict digraph FirstlevelCluster {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+	label= ">C3";
+		subgraph	cluster_2 {
+		label = "011221";
+			style = filled;
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH2;
+			node	[label = C3, shape = plaintext, fontsize = 16] C32;
+			node	[label = C10, shape = plaintext, fontsize = 16] C102;
+			node	[label = C30, shape = plaintext, fontsize = 16] C302;
+			VEH2->C32;C102->C32;C302->C32;			}
+		subgraph	cluster_3 {
+		label = "000220";
+			style = filled;
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH3;
+			node	[label = C3, shape = plaintext, fontsize = 16] C33;
+			node	[label = C10, shape = plaintext, fontsize = 16] C103;
+			node	[label = C30, shape = plaintext, fontsize = 16] C303;
+			VEH3->C33;VEH3->C103;VEH3->C303;C103->C33;C103->C303;C303->C33;			}
+		subgraph	cluster_4 {
+		label = "021220";
+			style = filled;
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH4;
+			node	[label = C3, shape = plaintext, fontsize = 16] C34;
+			node	[label = C10, shape = plaintext, fontsize = 16] C104;
+			node	[label = C30, shape = plaintext, fontsize = 16] C304;
+			VEH4->C34;C104->VEH4;C104->C34;C104->C304;C304->C34;			}
+		subgraph	cluster_5 {
+		label = "011220";
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH5;
+			node	[label = C3, shape = plaintext, fontsize = 16] C35;
+			node	[label = C10, shape = plaintext, fontsize = 16] C105;
+			node	[label = C30, shape = plaintext, fontsize = 16] C305;
+			VEH5->C35;C105->C35;C105->C305;C305->C35;			}
+		subgraph	cluster_6 {
+		label = "021221";
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH6;
+			node	[label = C3, shape = plaintext, fontsize = 16] C36;
+			node	[label = C10, shape = plaintext, fontsize = 16] C106;
+			node	[label = C30, shape = plaintext, fontsize = 16] C306;
+			VEH6->C36;C106->VEH6;C106->C36;C306->C36;			}
+}}

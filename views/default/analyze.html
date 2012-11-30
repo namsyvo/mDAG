@@ -1,0 +1,51 @@
+{{extend 'layout.html'}}
+{{if form.errors:}}
+        <br />
+        <font color=red>Please review your request for the following errors:</font>
+        <ul>
+        {{for fieldname in form.errors:}}
+            <li><font color=red>{{=form.errors[fieldname]}}</font></li>
+        {{pass}}
+        </ul>
+        <br />
+        {{form.errors.clear()}}
+{{pass}}
+<br />
+Select a data set and desirable parameters to analyze.
+ FDR is typically set at 0.05 and Permutation number at around 500.
+{{=form.custom.begin}}
+<table>
+  <tr>
+    <td>
+    <font size=3>Data:</font><br/>
+    {{=form.custom.widget.dataset_id}}
+      <br><br>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <font size=3>False discovery rate:</font><br/>{{=form.custom.widget.sign_level}}
+    </td>
+    <td>
+      False discovery rate is used in the Kruskal-Wallis procedure for selecting differentially expressed genes.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <br /><font size=3>Number of permutations</font><br/>{{=form.custom.widget.perm_number}}
+    </td>
+    <td>
+      Data are permuted using a Monte Carlo method used by the Kruskal-Wallis procedure to compensate for 
+      a small number of replicates.  A small number (e.g. 100) will produce results quickly whereas
+      a large number (e.g. 1000) will take much more time (but with more reliable results).
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2>
+      {{=form.custom.submit}}
+    </td>
+  </tr>
+</table>
+{{=form.custom.end}}

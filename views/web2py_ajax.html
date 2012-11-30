@@ -1,0 +1,14 @@
+{{
+for _item in response.meta or []:}}
+     <meta name="{{=_item}}" content="{{=response.meta[_item]}}" />{{
+pass
+for _k,_file in enumerate(response.files or []):
+  if _file in response.files[:_k]:
+     continue
+  elif _file[-4:].lower()=='.css':}}
+     <link href="{{=_file}}" rel="stylesheet" type="text/css" />{{
+  elif _file[-3:].lower()=='.js':}}
+     <script src="{{=_file}}" type="text/javascript"></script>{{
+  pass
+pass
+}}

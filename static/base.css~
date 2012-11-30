@@ -1,0 +1,9 @@
+#wrapper     {width:900px; margin:0 auto; padding:0em; border-left: 2px solid #eee; border-right: 2px solid #eee;}
+.inner       {padding:1em;}
+#title       {font-family: Georgia; font-size:150%; color:#222; padding:0.7em; margin-top:-10px;
+    background-color:#eee; 
+    border-bottom:5px solid #ddd; border-top:5px solid #ddd;}
+#footer      {margin-top:5em; border:2px solid #eee; background-color:#eee; width:900px;margin:0 auto;}
+body         {font-size:110%;color:#333;} 
+textarea     {width:700px;}
+a, a:visited    {color:#579;text-decoration:none;}

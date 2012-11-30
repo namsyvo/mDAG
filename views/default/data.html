@@ -1,0 +1,127 @@
+{{extend 'layout.html'}}
+
+{{if form.errors:}}
+	<br />
+    <font color=red>Please review your request for the following errors:</font>
+    <ul>
+        {{for fieldname in form.errors:}}
+            <li><font color=red>{{=form.errors[fieldname]}}</font></li>
+        {{pass}}
+    </ul>
+    {{form.errors.clear()}}
+{{pass}}
+{{if session.data_errors != None:}}
+        <br />
+        <font color=red>Please review your request for the following errors:</font>
+        <ul>
+            <li><font color=red>{{=session.data_errors}}</font></li>
+        </ul>
+	{{session.data_errors = None}}
+{{pass}}
+{{browser = request.env.http_user_agent}}
+{{if ('MSIE' in browser) and not ('MSIE 9.0' in browser or 'MSIE 8.0' in browser):}}
+	<p>Note: We see that you are using Internet Explorer 7.0 or older versions that we no longer support.
+	 Please use IE8 or a newer version. You also can use Firefox, Safari or Chrome.
+{{else:}}
+	<br />
+	{{=form.custom.begin}}
+	<table>
+		<tr >
+			<td>
+				Upload a dataset:<br />
+				{{=form.custom.widget.file_name}}
+				<br />Dataset must be a text file in
+				<a href="{{=URL(r=request, c='others', f='help', anchor='format')}}">the proper format.</a>
+				<br />See some <a href="{{=URL(r=request, c='others', f='downloads', anchor='sample')}}">sample data.</a>
+			</td>
+			<td>
+				Uploaded datasets: ({{=len(datasets)}} items)<br />
+				<select multiple="multiple" id="dataset">
+				{{for dataset in datasets:}}
+					<option value="{{=dataset.id}}">{{=dataset.ori_file_name}} ({{=dataset.upload_time}})</option>
+				{{pass}}
+				</select>
+  				<script>
+					$(function() {
+						$(".view").click(function() {
+							var ids = $("#dataset").val() || [];
+							if (ids == '') {
+								alert('Please choose dataset(s) to view');
+								return false;
+							}
+							else {
+								var view_url = "{{=URL(r = request, f = 'dataset')}}?ids=" + ids;
+								window.location = view_url;
+							}
+						});
+					});
+				</script>
+				<input type="button" value="View" class="view" />
+				{{if 'auth' in globals() and auth.user:}}
+				<script>
+					$(function() {
+						$(".remove").click(function() {
+							var ids = $("#dataset").val() || [];
+							if (ids == '') {
+								alert('Please choose dataset(s) to remove');
+								return false;
+							}
+							else {
+								var remove_url = "{{=URL(r = request, f = 'data', args = 'remove')}}?ids=" + ids;
+								var conf = confirm("Are you sure you want to remove this (these) dataset(s)?");
+								if (conf) {
+									window.location = remove_url;
+								}
+							}
+						});
+					});
+				</script>
+				<input type="button" value="Remove" class="remove" />
+				{{pass}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Specify name and number of replicates for each treatment:<br />
+				{{=form.custom.widget.rep_number}}
+			</td>
+			<td>
+				<script type="text/javascript"> 	
+				        $(function() {
+				                $(".example").click(function() {
+				                        document.getElementById('datasets_rep_number').value='CON 4\nBNF 5\nD3T 5\nOLT 6';
+				                });
+				        });
+				</script> 	
+				<br />Each line has a name (treatment) and number (replicates) separated by a space.
+				<br /><i>Example:</i>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"
+				 value="Paste this example into the box" class="example" />
+				<br />&nbsp;&nbsp;&nbsp;CON 4
+				<br />&nbsp;&nbsp;&nbsp;BNF 5
+				<br />&nbsp;&nbsp;&nbsp;D3T 5
+				<br />&nbsp;&nbsp;&nbsp;OLT 6
+				<br />
+				Note: <strong>the order of treatments must be consistent with the order of treatments in the data set.</strong>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2>
+				{{=form.custom.submit}}
+			</td>
+		</tr>
+    	</table>
+	{{=form.custom.end}}
+	{{if session.header != None:}}
+		<br />
+		Your dataset <b>"{{=session.file_name}}"</b> was uploaded successfully!
+		<ul>
+			<li>Name and number of replicates you entered: {{=session.treat_rep}}</li>
+			<li>Header of your dataset: {{=session.header}}</li>
+		</ul>
+		{{
+		session.file_name = None
+		session.treat_rep = None
+		session.header = None
+		}}
+	{{pass}}
+{{pass}}

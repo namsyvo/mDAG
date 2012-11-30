@@ -1,0 +1,60 @@
+<!doctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>{{=response.title or request.application}}</title>
+	{{response.files.append(URL('static', 'css/base.css'))
+    response.files.append(URL('static', 'css/superfish.css'))
+	response.files.append(URL('static', 'js/jquery.js'))
+    response.files.append(URL('static', 'js/superfish.js'))
+    response.files.append(URL('static', 'js/sorttable.js'))
+    response.files.append(URL('static', 'js/jqBarGraph.js'))
+	response.files.append(URL('static', 'js/modernizr-1.6.min.js'))}}
+  	<!-- Modernizr which enables HTML5 elements & feature detects -->
+    {{include 'web2py_ajax.html'}}
+  </head>
+  <body>
+    <div class="flash">{{=response.flash or ''}}</div> <!-- notification div -->
+    <div id="container">
+      <div id="wrapper">
+		<div id="header"> <!-- header and login nav -->
+		   {{block header}} <!-- this is default header -->
+		   {{try:}}{{=auth.navbar(prefix=T('Welcome'),action=URL('default','user'))}}{{except:pass}}
+		   <div id="title">
+    	    	<h1> <font face="Georgia"> {{=A(T('mDAG'),_href=URL('default','index'))}} </font> </h1>
+    	   		<i> {{=response.subtitle or 'response.subtitle'}} </i>
+		   </div>
+		   <div style="clear: both;"></div><!-- Clear the divs -->	
+		   {{end}}
+		</div><!-- header  -->
+		<div id="statusbar"><!-- statusbar is menu zone -->
+		  {{block statusbar}} <!-- this is default statusbar -->
+		  {{#------ superfish menu ------}}
+		  {{=MENU(response.menu,_class='sf-menu')}}
+		  <script>
+		    jQuery(document).ready(function(){
+		    jQuery('ul.sf-menu').superfish();});
+		  </script>
+		  <div style="clear: both;"></div><!-- Clear the divs -->	
+		  {{end}}				
+		</div><!-- statusbar -->
+		<div id="page"> <!-- Here my central body -->	  
+		  <!-- begin content -->
+		  <div id="content">
+		    {{include}}	
+		  </div>
+		  <!-- end content -->
+ 		  <div style="clear: both;"></div> <!-- Clear the divs -->
+		</div> <!-- page -->
+		<div id="footer">
+		  {{block footer}} <!-- this is default footer -->
+		  <a href="http://www.web2py.com/" style="float: left; padding-right: 6px;">
+		    <img src="{{=URL('static','images/poweredby.png')}}"/>
+		  </a>
+		  Copyright &#169; 2012. <a href="http://www.memphis.edu">The University of Memphis.</a>
+		  {{end}}
+		</div><!-- footer -->
+      </div><!-- wrapper -->
+    </div><!-- container -->		
+  </body>
+</html>

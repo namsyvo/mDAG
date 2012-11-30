@@ -1,0 +1,13 @@
+strict digraph FirstlevelCluster {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+	label= "VEH~D3T>";
+		subgraph	cluster_2 {
+		label = "100";
+			style = filled;
+			node	[label = VEH, shape = plaintext, fontsize = 16] VEH2;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T2;
+			node	[label = C3, shape = plaintext, fontsize = 16] C32;
+			VEH2->C32;D3T2->C32;			}
+}}

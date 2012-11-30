@@ -1,0 +1,308 @@
+{{extend 'layout.html'}}
+{{
+import sys
+import os
+import re
+import gc
+Methods = local_import('Methods', reload = True)
+
+pattern = request.vars.p
+}}
+<br />
+<h2>
+	<a href="{{=URL(r=request, f='firstlevel', vars=dict(id=result.id))}}">Clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='secondlevel', vars=dict(id=result.id))}}">Meta-clusters</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{{=URL(r=request, f='overview', vars=dict(id=result.id))}}">All patterns as directed graph</a>
+</h2>
+<hr />
+<br />
+<script>
+	foldchange = new Array(
+	{{for i in range(numoftreat - 2):}}
+		[[{{=round(fold_change_mean[i], 2)}},
+		 {{=round(fold_samp_std_dev[i], 2)}}], '{{=nameoftreat[i+1]}}'],
+	{{pass}}
+		[[{{=round(fold_change_mean[numoftreat - 2], 2)}},
+		 {{=round(fold_samp_std_dev[numoftreat - 2], 2)}}], '{{=nameoftreat[numoftreat-1]}}']
+	);
+
+	$(function() {
+		$("#FoldChangeGraph").jqBarGraph({
+			data: foldchange,
+			colors: ['#437346','#AB2522'],
+			legends: ['Average fold-change value', 'Sample standard deviation'],
+			legend: true,
+			legendWidth: 150,
+			sort: 'desc',
+			color: '#ffffff',
+			type: 'multi',
+			width: 600,
+			height: 270,
+			speed: 1,
+			showValues: true,
+			barSpace: 20
+		});
+	});
+</script>
+
+<div style="float: left; width: 250px;" class="thumbnail">
+	<a href="{{=URL(r=request, c='static', f=graph_path)}}"
+	 title="Pattern as transitive directed acyclic graph">
+	 <img src="{{=URL(r=request, c='static', f=graph_path)}}" width="250px"
+	  alt="No image. Please reload the page"/></a>
+</div>
+<div style="float: left; width: 50px;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div style="float: left; width: 600px;" id="FoldChangeGraph"></div>
+
+<br clear="all" />
+<br />
+<div style="float: left; width: 250px;">
+<b>Pattern as ternary digit and transitive directed acyclic graph</b></div>
+<div style="float: left; width: 50px;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div style="float: left; width: 600px;">
+<b>Average fold-change values and sample standard
+ deviation of expression data (in descending order)</b></div>
+
+<br clear="all" />
+<br />
+<b>Pattern as transitive directed acyclic graph in topological order:  <font color="blue">
+{{=Methods.ContractiveTopologicalSorting(numoftreat, nameoftreat, pattern)}}</font></b>
+
+<script>
+    $(function() {
+        $('.genemaniasubmit').click(function() {
+			var organism = $("#genemania_organism").val();
+			var genemania_url = "http://genemania.org/link?o="
+			 + organism + "&g=" + "{{=genemania_list}}"
+
+            var conf = confirm("You want to send this gene list to GeneMANIA with organism type '"
+             + organism + "' ?");
+			if (conf) {
+				window.open(genemania_url, "_blank");
+			}
+        });
+    });
+
+    $(function() {
+        $('.davidsubmit').click(function() {
+			var type = $("#david_type").val();
+			var tool = $("#david_tool").val();
+			var david_url = "http://david.abcc.ncifcrf.gov/api.jsp?type=" + type
+			 + "&ids=" + "{{=david_list}}" + "&tool=" + tool
+
+            var conf = confirm("You want to send this gene list to DAVID with gene type '"
+             + type + "' and tool '" + tool + "' ?");
+			if (conf) {
+				window.open(david_url, "_blank");
+			}
+        });
+    });
+
+    $(function() {
+        $('.gcatsubmit').click(function() {
+			var organism = $("#gcat_organism").val();
+			var subset = $("#gcat_subset").val();
+			var year = $("#gcat_year").val();
+			var gcat_url = "http://binf2.memphis.edu/gcat/?organism=" + organism
+			 + "&subset=" + subset + "&year=" + year + "&geneInput=" + "{{=gcat_list}}"
+
+            var conf = confirm("You want to send this gene list to GCAT with organism name '" + organism
+             + "' and subset '" + subset + "' in year '" + year + "' ?");
+			if (conf) {
+				window.open(gcat_url, "_blank");
+			}
+        });
+    });
+</script>
+
+<br /><br />
+<b>Transfer gene list in this pattern to:</b>
+<ul>
+	<li>
+		<a href="http://genemania.org/" target="_blank">GeneMANIA</a>
+		 using gene symbols with organism name:
+		<select id="genemania_organism">
+			<option value="3702">A. thaliana (arabidopsis)</option>
+			<option value="6239">C. elegans (worm)</option>
+			<option value="7227">D. melanogaster (fly)</option>
+			<option value="9606">H. sapiens (human)</option>
+			<option value="10090" selected="selected">M. musculus (mouse)</option>
+			<option value="4932">S. cerevisiae (baker's yeast)</option>
+		</select>
+		<br />
+		<input type="button" value="Submit" class="genemaniasubmit">
+
+	</li>
+
+	<br />
+
+	<li>
+		<a href="http://david.abcc.ncifcrf.gov/" target="_blank">DAVID</a>
+		 using probe sets with gene type:
+		<select id="david_type">
+		  	<option value ='AFFYMETRIX_3PRIME_IVT_ID' selected="selected">AFFYMETRIX_3PRIME_IVT_ID</option>
+		  	<option value ='AFFYMETRIX_EXON_GENE_ID'>AFFYMETRIX_EXON_GENE_ID</option>
+		  	<option value ='AFFYMETRIX_SNP_ID'>AFFYMETRIX_SNP_ID</option>
+		  	<option value ='AGILENT_CHIP_ID'>AGILENT_CHIP_ID</option>
+		  	<option value ='AGILENT_ID'>AGILENT_ID</option>
+		  	<option value ='AGILENT_OLIGO_ID'>AGILENT_OLIGO_ID</option>
+		  	<option value ='ENSEMBL_GENE_ID'>ENSEMBL_GENE_ID</option>
+		  	<option value ='ENSEMBL_TRANSCRIPT_ID'>ENSEMBL_TRANSCRIPT_ID</option>
+		  	<option value ='ENTREZ_GENE_ID'>ENTREZ_GENE_ID</option>
+		  	<option value ='FLYBASE_GENE_ID'>FLYBASE_GENE_ID</option>
+		  	<option value ='FLYBASE_TRANSCRIPT_ID'>FLYBASE_TRANSCRIPT_ID</option>
+		  	<option value ='GENBANK_ACCESSION'>GENBANK_ACCESSION</option>
+		  	<option value ='GENOMIC_GI_ACCESSION'>GENOMIC_GI_ACCESSION</option>
+		  	<option value ='GENPEPT_ACCESSION'>GENPEPT_ACCESSION</option>
+		  	<option value ='ILLUMINA_ID'>ILLUMINA_ID</option>
+		  	<option value ='IPI_ID'>IPI_ID</option>
+		  	<option value ='MGI_ID'>MGI_ID</option>
+		  	<option value ='OFFICIAL_GENE_SYMBOL'>OFFICIAL_GENE_SYMBOL</option>
+		  	<option value ='PFAM_ID'>PFAM_ID</option>
+		  	<option value ='PIR_ID'>PIR_ID</option>
+		  	<option value ='PROTEIN_GI_ACCESSION'>PROTEIN_GI_ACCESSION</option>
+		  	<option value ='REFSEQ_GENOMIC'>REFSEQ_GENOMIC</option>
+		  	<option value ='REFSEQ_MRNA'>REFSEQ_MRNA</option>
+		  	<option value ='REFSEQ_PROTEIN'>REFSEQ_PROTEIN</option>
+		  	<option value ='REFSEQ_RNA'>REFSEQ_RNA</option>
+		  	<option value ='RGD_ID'>RGD_ID</option>
+		  	<option value ='SGD_ID'>SGD_ID</option>
+		  	<option value ='TAIR_ID'>TAIR_ID</option>
+		  	<option value ='UCSC_GENE_ID'>UCSC_GENE_ID</option>
+		  	<option value ='UNIGENE'>UNIGENE</option>
+		  	<option value ='UNIPROT_ACCESSION'>UNIPROT_ACCESSION</option>
+		  	<option value ='UNIPROT_ID'>UNIPROT_ID</option>
+		  	<option value ='UNIREF100_ID'>UNIREF100_ID</option>
+		  	<option value ='WORMBASE_GENE_ID'>WORMBASE_GENE_ID</option>
+		  	<option value ='WORMPEP_ID'>WORMPEP_ID</option>
+		  	<option value ='ZFIN_ID'>ZFIN_ID</option>
+			<option value="NA">Not Sure </option>
+		</select>
+
+		and tool name:
+
+		<select id="david_tool">
+			<option value="gene2gene" selected="selected">Gene Functional Classification</option>
+			<option value="term2term">Funtional Annotation Clustering</option>
+			<option value="summary">Functional Annotation Summary</option>
+			<option value="chartReport">Functional Annotation Chart</option>
+			<option value="annotationReport">Functional Annotation Table</option>
+			<option value="list">Show Gene List Names in Batch</option>
+			<option value="geneReport">Funtional Annotation Clustering</option>
+			<option value="geneReportFull">Gene Full Report</option>
+		</select>
+		<br />
+		<input type="button" value="Submit" class="davidsubmit">
+
+	</li>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#gcat_organism").change(function () {
+				var org = $('#gcat_organism').val();
+				if(org == 'mouse') {
+					$("#gcat_subset option[value='1']").attr("selected","selected");
+					$('#gcat_subset').eq(0).attr('selected', 'rrrr')
+					$('#gcat_subset').eq(1).attr('selected', 'qqqq')
+				}
+				else {
+					$('#gcat_subset').eq(0).attr('selected', 'vvvv')
+					$('#gcat_subset').eq(1).attr('selected', 'tttt')
+				}					
+		    });
+			.trigger('change');
+		});
+
+		if(org == 'mouse') options = ['all','Entire Mouse Genome','430-2',
+		 'Affymetrix GeneChip® Mouse Genome 430 2.0 Array'];
+		else options = ['all','Entire Human Genome','133-2',
+		 'Human Genome U133 Plus 2.0 Array'];
+	</script>
+
+	<br />
+
+	<li>
+		<a href="http://binf1.memphis.edu/gcat/" target="_blank">GCAT</a>
+		 using gene symbols with organism name:
+
+		<select id="gcat_organism">
+			<option value="human" >Human (Homo sapiens)</option>
+			<option value="mouse" selected="selected">Mouse (Mus musculus)</option>
+		</select>
+		
+		Gene Subset:
+		
+		<select id="gcat_subset" length=1>
+			<option value="430-2" >Affymetrix GeneChip Mouse Genome 430 2.0 Array</option>
+			<option value="all" selected>Entire Mouse Genome</option>
+		</select>
+		
+		and Year:
+		
+		<select id="gcat_year" size="1">
+			<option value="2010" SELECTED>2010</option>
+			<option value="2007" >2007</option>
+		</select>
+		<br />
+		<input type="button" value="Submit" class="gcatsubmit">
+	</li>
+</ul>
+
+<br />
+<b>Detail information about genes in pattern:</b>
+
+<br />
+<i>(Click on the header of each column to sort that column,
+ click on the items to search gene on NCBI for more information)</i>
+<br />
+<br />
+<a href = "{{=URL(r=request, c='static', f=gene_file_path)}}" target="_blank"><b>Download</a> this Gene List</b>
+<br />
+<br />
+
+<table class="sortable" border="0">
+	<tr>
+		<td><b>Probe Set</b></td>
+		<td><b>Gene Symbol</b></td>
+		<td><b>Uni Gene ID</b></td>
+		<td><b>Rep. Public ID</b></td>
+		<td><b>Other information</b></td>
+		<td><b>Pvalue</b></td>
+		<td><b>Fold Change</b><br />[{{for i in range(numoftreat - 2):}}~{{=nameoftreat[i+1]}},
+		 {{pass}}~{{=nameoftreat[numoftreat-1]}}]</td>
+	</tr>
+
+	{{for index, value in meantuple:}}
+	<tr>
+		<td width=10%><a href="http://www.ncbi.nlm.nih.gov/geoprofiles?term={{=probeset[int(index)]}}"
+		 target="_blank">{{=probeset[int(index)]}}</a></td>
+		<td width=10%><a href="http://www.ncbi.nlm.nih.gov/gene?term={{=Sgenesymbol[int(index)]}}"
+		 target="_blank">{{=genesymbol[int(index)]}}</td>
+		<td width=10%><a href="http://www.ncbi.nlm.nih.gov/unigene?term={{=Sunigeneid[int(index)]}}"
+		 target="_blank">{{=unigeneid[int(index)]}}</td>
+		<td width=10%><a href="http://www.ncbi.nlm.nih.gov/gene?term={{=reppubid[int(index)]}}"
+		 target="_blank">{{=reppubid[int(index)]}}</td>
+		<td width=20%>{{=otherinfo[int(index)]}}</td>
+		<td width=10%>{{=round(pvalue_dict[int(index)], 3)}}</td>
+		<script>
+			$(function() {
+				$("#fc{{=index}}").click(function () {
+				    mywindow = window.open(this.href, '_blank',
+				     'width=500, height=400, left=500, top=500, status=no, menubar=no');
+				    return false
+				});
+			});
+		</script>
+
+		<td width=20%><a id=fc{{=index}} href = "{{=URL(r = request, f = 'fcgraph',
+		 vars = dict(id = result.id, index = index, ps = probeset[int(index)],
+		  gs = genesymbol[int(index)], ugid = unigeneid[int(index)],
+		   rpid = reppubid[int(index)]))}}">
+		   {{=Methods.roundlist(fold_change_dict[int(index)], 2)}}</a></td>
+	</tr>
+	{{pass}}
+</table>

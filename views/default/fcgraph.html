@@ -1,0 +1,43 @@
+<!doctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	{{response.files.append(URL('static', 'js/jquery.js'))}}
+    {{response.files.append(URL('static', 'js/jqBarGraph.js'))}}
+    {{include 'web2py_ajax.html'}}
+  </head>
+  <body>
+	<script>
+		FoldChange = new Array(
+		{{for i in range(numoftreat-2):}}
+			[{{=round(fc_array[i], 2)}}, '{{=nameoftreat[i+1]}}', '#437346'],
+		{{pass}}
+			[{{=round(fc_array[numoftreat-2], 2)}}, '{{=nameoftreat[numoftreat - 1]}}', '#437346']
+		);
+		$(function() {
+			$("#FoldChangeGraph").jqBarGraph({
+				data: FoldChange,
+				sort: 'desc',
+				color: '#ffffff',
+				width: 150,
+				height: 170,
+				speed: 1,
+				barSpace: 10
+			});
+		});
+	</script>
+	<br />
+	<div id="FoldChangeGraph"></div>
+	<br />
+	<div>Fold-change values of expression data (in descending order)</div>
+	<br />
+	Probe set: {{=request.vars.ps}}
+	<br />
+	Gene symbol: {{=request.vars.gs}}
+	<br />
+	UniGene ID: {{=request.vars.ugid}}
+	<br />
+	Rep. pub. ID: {{=request.vars.rpid}}
+	<br />
+  </body>
+
+</html>

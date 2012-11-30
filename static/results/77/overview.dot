@@ -1,0 +1,125 @@
+strict digraph TDAGS {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+		subgraph cluster_1 {
+			label= "100";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH1;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T1;
+			node [label= C10, shape = plaintext, fontsize=12] C101;
+			VEH1->C101;D3T1->C101;		}
+		subgraph cluster_2 {
+			label= "122";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH2;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T2;
+			node [label= C10, shape = plaintext, fontsize=12] C102;
+			C102->VEH2;C102->D3T2;		}
+		subgraph cluster_3 {
+			label= "210";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH3;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T3;
+			node [label= C10, shape = plaintext, fontsize=12] C103;
+			D3T3->VEH3;D3T3->C103;		}
+		subgraph cluster_4 {
+			label= "221";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH4;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T4;
+			node [label= C10, shape = plaintext, fontsize=12] C104;
+			D3T4->VEH4;C104->VEH4;		}
+		subgraph cluster_5 {
+			label= "001";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH5;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T5;
+			node [label= C10, shape = plaintext, fontsize=12] C105;
+			VEH5->D3T5;VEH5->C105;		}
+		subgraph cluster_6 {
+			label= "000";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH6;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T6;
+			node [label= C10, shape = plaintext, fontsize=12] C106;
+			VEH6->D3T6;VEH6->C106;D3T6->C106;		}
+		subgraph cluster_7 {
+			label= "220";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH7;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T7;
+			node [label= C10, shape = plaintext, fontsize=12] C107;
+			D3T7->VEH7;D3T7->C107;C107->VEH7;		}
+		subgraph cluster_8 {
+			label= "012";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH8;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T8;
+			node [label= C10, shape = plaintext, fontsize=12] C108;
+			VEH8->D3T8;C108->D3T8;		}
+		subgraph cluster_9 {
+			label= "101";
+node [label= VEH, shape = plaintext, fontsize=12] VEH9;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T9;
+			node [label= C10, shape = plaintext, fontsize=12] C109;
+			VEH9->C109;		}
+		subgraph cluster_10 {
+			label= "222";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH10;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T10;
+			node [label= C10, shape = plaintext, fontsize=12] C1010;
+			D3T10->VEH10;C1010->VEH10;C1010->D3T10;		}
+		subgraph cluster_11 {
+			label= "200";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH11;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T11;
+			node [label= C10, shape = plaintext, fontsize=12] C1011;
+			VEH11->C1011;D3T11->VEH11;D3T11->C1011;		}
+		subgraph cluster_12 {
+			label= "022";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH12;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T12;
+			node [label= C10, shape = plaintext, fontsize=12] C1012;
+			VEH12->D3T12;C1012->VEH12;C1012->D3T12;		}
+		subgraph cluster_13 {
+			label= "211";
+node [label= VEH, shape = plaintext, fontsize=12] VEH13;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T13;
+			node [label= C10, shape = plaintext, fontsize=12] C1013;
+			D3T13->VEH13;		}
+		subgraph cluster_14 {
+			label= "110";
+node [label= VEH, shape = plaintext, fontsize=12] VEH14;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T14;
+			node [label= C10, shape = plaintext, fontsize=12] C1014;
+			D3T14->C1014;		}
+		subgraph cluster_15 {
+			label= "121";
+node [label= VEH, shape = plaintext, fontsize=12] VEH15;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T15;
+			node [label= C10, shape = plaintext, fontsize=12] C1015;
+			C1015->VEH15;		}
+		subgraph cluster_16 {
+			label= "002";
+			style = filled;
+			node [label= VEH, shape = plaintext, fontsize=12] VEH16;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T16;
+			node [label= C10, shape = plaintext, fontsize=12] C1016;
+			VEH16->D3T16;VEH16->C1016;C1016->D3T16;		}
+		subgraph cluster_17 {
+			label= "011";
+node [label= VEH, shape = plaintext, fontsize=12] VEH17;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T17;
+			node [label= C10, shape = plaintext, fontsize=12] C1017;
+			VEH17->D3T17;		}
+		subgraph cluster_18 {
+			label= "112";
+node [label= VEH, shape = plaintext, fontsize=12] VEH18;
+			node [label= D3T, shape = plaintext, fontsize=12] D3T18;
+			node [label= C10, shape = plaintext, fontsize=12] C1018;
+			C1018->D3T18;		}
+}}

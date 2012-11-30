@@ -1,0 +1,112 @@
+strict digraph FirstlevelCluster {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+	label= ">BNF";
+		subgraph	cluster_2 {
+		label = "011221";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON2;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF2;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T2;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT2;
+			CON2->BNF2;D3T2->BNF2;OLT2->BNF2;			}
+		subgraph	cluster_3 {
+		label = "022221";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON3;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF3;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T3;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT3;
+			CON3->BNF3;D3T3->CON3;D3T3->BNF3;OLT3->CON3;OLT3->BNF3;			}
+		subgraph	cluster_4 {
+		label = "021220";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON4;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF4;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T4;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT4;
+			CON4->BNF4;D3T4->CON4;D3T4->BNF4;D3T4->OLT4;OLT4->BNF4;			}
+		subgraph	cluster_5 {
+		label = "021221";
+			node	[label = CON, shape = plaintext, fontsize = 16] CON5;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF5;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T5;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT5;
+			CON5->BNF5;D3T5->CON5;D3T5->BNF5;OLT5->BNF5;			}
+		subgraph	cluster_6 {
+		label = "022220";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON6;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF6;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T6;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT6;
+			CON6->BNF6;D3T6->CON6;D3T6->BNF6;D3T6->OLT6;OLT6->CON6;OLT6->BNF6;			}
+		subgraph	cluster_7 {
+		label = "012221";
+			node	[label = CON, shape = plaintext, fontsize = 16] CON7;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF7;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T7;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT7;
+			CON7->BNF7;D3T7->BNF7;OLT7->CON7;OLT7->BNF7;			}
+		subgraph	cluster_8 {
+		label = "011220";
+			node	[label = CON, shape = plaintext, fontsize = 16] CON8;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF8;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T8;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT8;
+			CON8->BNF8;D3T8->BNF8;D3T8->OLT8;OLT8->BNF8;			}
+		subgraph	cluster_9 {
+		label = "000221";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON9;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF9;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T9;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT9;
+			CON9->BNF9;CON9->D3T9;CON9->OLT9;D3T9->BNF9;OLT9->BNF9;			}
+		subgraph	cluster_10 {
+		label = "001221";
+			node	[label = CON, shape = plaintext, fontsize = 16] CON10;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF10;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T10;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT10;
+			CON10->BNF10;CON10->D3T10;D3T10->BNF10;OLT10->BNF10;			}
+		subgraph	cluster_11 {
+		label = "001222";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON11;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF11;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T11;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT11;
+			CON11->BNF11;CON11->D3T11;D3T11->BNF11;OLT11->BNF11;OLT11->D3T11;			}
+		subgraph	cluster_12 {
+		label = "011222";
+			node	[label = CON, shape = plaintext, fontsize = 16] CON12;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF12;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T12;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT12;
+			CON12->BNF12;D3T12->BNF12;OLT12->BNF12;OLT12->D3T12;			}
+		subgraph	cluster_13 {
+		label = "010221";
+			node	[label = CON, shape = plaintext, fontsize = 16] CON13;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF13;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T13;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT13;
+			CON13->BNF13;CON13->OLT13;D3T13->BNF13;OLT13->BNF13;			}
+		subgraph	cluster_14 {
+		label = "010220";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON14;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF14;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T14;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT14;
+			CON14->BNF14;CON14->OLT14;D3T14->BNF14;D3T14->OLT14;OLT14->BNF14;			}
+		subgraph	cluster_15 {
+		label = "012222";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON15;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF15;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T15;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT15;
+			CON15->BNF15;D3T15->BNF15;OLT15->CON15;OLT15->BNF15;OLT15->D3T15;			}
+}}

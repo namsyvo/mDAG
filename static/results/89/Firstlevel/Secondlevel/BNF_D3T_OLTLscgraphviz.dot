@@ -1,0 +1,14 @@
+strict digraph FirstlevelCluster {
+	labelloc = "t";
+	compound = false;
+	subgraph cluster_0 {
+	label= ">BNF~D3T~OLT";
+		subgraph	cluster_2 {
+		label = "000111";
+			style = filled;
+			node	[label = CON, shape = plaintext, fontsize = 16] CON2;
+			node	[label = BNF, shape = plaintext, fontsize = 16] BNF2;
+			node	[label = D3T, shape = plaintext, fontsize = 16] D3T2;
+			node	[label = OLT, shape = plaintext, fontsize = 16] OLT2;
+			CON2->BNF2;CON2->D3T2;CON2->OLT2;			}
+}}

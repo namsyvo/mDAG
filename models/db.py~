@@ -1,0 +1,175 @@
+# -*- coding: utf-8 -*-
+
+import os
+from datetime import date, time, datetime
+#import MySQLdb
+
+
+#########################################################################
+## This scaffolding model makes your app work on Google App Engine too
+#########################################################################
+if request.env.web2py_runtime_gae:            # if running on Google App Engine
+    db = DAL('gae')                           # connect to Google BigTable
+    session.connect(request, response, db=db) # and store sessions and tickets there
+    ### or use the following lines to store sessions in Memcache
+    # from gluon.contrib.memdb import MEMDB
+    # from google.appengine.api.memcache import Client
+    # session.connect(request, response, db=MEMDB(Client()))
+else:                                         # else use a normal relational database
+    db = DAL('sqlite://storage.db')       # if not, use SQLite or other DB
+#    db = DAL('mysql://mdat:mdat@localhost/mdat', pool_size=10)
+
+## if no need for session
+# session.forget()
+######################################################################################
+
+
+##############################################################################
+from gluon.tools import *
+auth = Auth(globals(), db)              # authentication/authorization
+crud = Crud(globals(), db)              # for CRUD helpers using auth
+service = Service(globals())           # for json, xml, jsonrpc, xmlrpc, amfrpc
+##############################################################################
+
+
+##############################################################################
+## define auth tables
+##############################################################################
+auth.settings.table_user_name = 'auth_user_name'
+auth.settings.table_group_name = 'auth_group'
+auth.settings.table_membership_name = 'auth_membership'
+auth.settings.table_permission_name = 'auth_permission'
+auth.settings.table_event_name = 'auth_event'
+
+auth.settings.hmac_key='sha512:5fb870f7-40c7-4498-8b2a-cc7b05588d8b'
+#auth.settings.registration_requires_approval = True
+
+#define my own auth_user table
+auth_table = db.define_table(
+    auth.settings.table_user_name,
+    Field('first_name', length = 128, default = ''),
+    Field('last_name', length = 128, default = ''),
+    Field('email', length = 128, default = '', unique = True),
+    Field('password', 'password', length = 256, readable = False, label = 'Password'),
+    Field('registration_key', length = 128, default = '', writable = False, readable = False))
+
+auth_table.first_name.requires = IS_NOT_EMPTY(error_message=auth.messages.is_empty)
+auth_table.last_name.requires = IS_NOT_EMPTY(error_message=auth.messages.is_empty)
+auth_table.password.requires = [CRYPT()]
+auth_table.email.requires = [IS_EMAIL(error_message=auth.messages.invalid_email), IS_NOT_IN_DB(db, auth_table.email)]
+
+auth.settings.table_user = auth_table
+
+auth.define_tables()                 # creates all needed tables
+
+crud.settings.auth = auth            # enforces authorization on crud
+#############################################################################
+
+
+#############################################################################
+#mail=Mail()                                  # mailer
+#mail.settings.server = 'logging' or 'smtp.gmail.com:587'  # your SMTP server
+#mail.settings.sender = 'vosynam@gmail.com'         # your email
+#mail.settings.login = 'username:password'      # your credentials or None
+
+#auth.settings.mailer=mail          # for user email verification
+#auth.settings.registration_requires_verification = True
+#auth.settings.registration_requires_approval = True
+#auth.messages.verify_email = 'Click on the link http://'+request.env.http_host+URL(r=request,c='default',f='user',args=['verify_email'])+'/%(key)s to verify your email'
+#auth.settings.reset_password_requires_verification = True
+#auth.messages.reset_password = 'Click on the link http://'+request.env.http_host+URL(r=request,c='default',f='user',args=['reset_password'])+'/%(key)s to reset your password'
+#############################################################################
+
+
+#############################################################################
+## datasets table
+#############################################################################
+db.define_table('datasets',
+   Field('username_id'),
+   Field('file_name', 'upload', length = 256),
+   Field('ori_file_name'),
+   Field('rep_number', 'text'),
+   Field('upload_time', 'datetime', default = request.now),
+   Field('description', 'text'))
+
+#constraints for datasets table
+db.datasets.username_id.readable = False
+db.datasets.username_id.writable = False
+db.datasets.file_name.requires = IS_UPLOAD_FILENAME(extension = 'txt')
+db.datasets.rep_number.requires = IS_NOT_EMPTY()
+db.datasets.upload_time.requires = IS_DATETIME()
+db.datasets.upload_time.readable = False
+db.datasets.upload_time.writable = False
+#########################################
+
+
+#############################################################################
+## results table
+#############################################################################
+db.define_table('results',
+   Field('dataset_id', db.datasets),
+   Field('rep_number', 'text'),
+   Field('sign_level', 'double', default = 0.05),
+   Field('perm_number', 'integer', default = 500),
+   Field('status', 'string', default = 'Waiting'),
+   Field('upload_time', 'datetime', default=request.now),
+   Field('start_time', 'datetime'),
+   Field('finish_time', 'datetime'),
+   Field('binary_dict', 'text', default=''),
+   Field('pattern_dict', 'text', default=''),
+   Field('index_pattern_dict', 'text', default=''),
+   Field('monte_carlo_pvalue', 'text', default=''),
+   Field('result_dict', 'text', default=''),
+   Field('symbol_dict', 'text', default=''),
+   Field('sum_dict', 'text', default=''),
+   Field('contract_dict', 'text', default=''),
+   Field('pvalue_dict', 'text', default=''),
+   Field('fold_change_dict', 'text', default=''),
+   Field('description', 'text', default = ''))
+
+#constraints for datasets table
+db.results.dataset_id.requires = IS_IN_DB(db, db.datasets.id, '%(ori_file_name)s', zero=None)
+db.results.dataset_id.represent = lambda id: db.datasets[id].ori_file_name
+db.results.sign_level.requires = IS_NOT_EMPTY()
+db.results.sign_level.requires = IS_IN_SET([0.01, 0.05, 0.1], zero=None)
+db.results.perm_number.requires = IS_NOT_EMPTY()
+db.results.perm_number.requires = IS_INT_IN_RANGE(50, 1001)
+db.results.status.readable = False
+db.results.status.writable = False
+db.results.upload_time.requires = IS_DATETIME()
+db.results.upload_time.readable = False
+db.results.upload_time.writable = False
+db.results.start_time.requires = IS_DATETIME()
+db.results.start_time.readable = False
+db.results.start_time.writable = False
+db.results.finish_time.requires = IS_DATETIME()
+db.results.finish_time.readable = False
+db.results.finish_time.writable = False
+###############################################################
+
+
+#########################################################
+##systems table: for managing requests
+#########################################################
+db.define_table('systems',
+   Field('locked', 'boolean'),
+   Field('default_process', 'integer'),
+   Field('max_process', 'integer'))
+
+#constraints for systems table
+db.systems.default_process.requires = IS_NOT_EMPTY()
+db.systems.default_process.requires = IS_INT_IN_RANGE(1, 10)
+db.systems.max_process.requires = IS_NOT_EMPTY()
+db.systems.max_process.requires = IS_INT_IN_RANGE(1, 50)
+#########################################################
+
+
+##################################################
+#sampledata table: for storing sample datasets
+db.define_table('sampledata',
+   Field('file_name', 'upload', uploadfolder=os.path.join(request.folder, 'static', 'sampledata')),
+   Field('description', 'text'))
+
+#constraints for sampledata table
+db.sampledata.file_name.requires = IS_NOT_EMPTY()
+##################################################

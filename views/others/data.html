@@ -1,0 +1,31 @@
+{{extend 'layout.html'}}
+
+<h2>Data format</h2>
+
+<p>
+<ul>
+  <li> Data must be stored in a tab-separated text file.</li>
+  <li> The first row is the header that describes each column. </li>
+  <li> Each row, starting from the second, corresponds to each gene/probe.</li>
+  <li> Columns are separated by tabs.  The best way to do this is select appropriate columns in your Excel files and save them as text.</li>
+    <ul>
+      <li>First column, Probe Set Id</li>
+      <li>Second column, Gene Symbol</li>
+      <li>Third column, UniGene Id</li>
+      <li>Fourth column, Rep. Pub. Id</li>
+      <li>Fifth column, Gene Title and other information</li>
+    </ul>
+
+  <p><strong>Note</strong>: the first five columns may have missing values. Missing or even inaccurate values on the first five columns do not affect our analysis.  Note, however, that missing or inaccurate values may cause inaccurate analyses by external resources such as NCBI, GeneMANIA, DAVID, and GCAT.
+    <br />
+    <ul>
+      <li>Sixth column (and the rest) specifies the expression value of each replicate for a treatment.</li>
+      <li>Replicates for each treatment group must be consecutive. The first one must be Control group.</li>
+      <li>Expression values must be non-log values.</li> 
+    </ul>
+
+    <br />
+Here's a snapshot of a sample dataset (shown in Excel to see better, but you must convert to text format before uploading).
+<br />
+<br />
+<img src="{{=URL(request.application, 'static/images', 'dataset-example.png')}}" width="100%", heght="100%" align ="center">
