@@ -1,7 +1,0 @@
-Beside web2py framework, the following third-party packages are included in this app:
-	- Python 2.6+
-	- Graphviz
-	- sqlite
-	- jqBarGraph.js
-	- jquery.js
-	- sorttable.js
